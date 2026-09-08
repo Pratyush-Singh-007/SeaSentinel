@@ -3345,7 +3345,125 @@ html, body {
   color: #0f172a;
 }
 
-/* Light Mode: Right Rail Navigation Tabs & Suspect Cards */
+/* Light Mode: Right Forensic Drawer Inner Content & Cards */
+[data-theme="light"] .dock-scroll-body {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .dock-content-body {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .pane-hdr {
+  color: #0f172a !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .threat-gauge-card {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+}
+
+[data-theme="light"] .gauge-bg-circle {
+  stroke: #e2e8f0 !important;
+}
+
+[data-theme="light"] .gauge-center-text .gauge-pct {
+  color: #0f172a !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .gauge-center-text .gauge-label {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .threat-target-name {
+  color: #b45309 !important;
+}
+
+[data-theme="light"] .threat-breakdown-row {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .threat-breakdown-row strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .threat-bar-wrap {
+  background: #e2e8f0 !important;
+}
+
+[data-theme="light"] .threat-bar-fill {
+  background: #0284c7 !important;
+}
+
+[data-theme="light"] .slick-banner-box {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-left: 4px solid #059669 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="light"] .slick-headline {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .slick-submetrics {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .hdr-detector-badge {
+  background: #f1f5f9 !important;
+  color: #0369a1 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+[data-theme="light"] .kv-table {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .kv-row {
+  color: #475569 !important;
+  border-bottom: 1px dashed #cbd5e1 !important;
+}
+
+[data-theme="light"] .kv-row strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .checkpoint-box {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+[data-theme="light"] .checkpoint-title {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .cp-row {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .cp-row strong {
+  color: #047857 !important;
+}
+
+[data-theme="light"] .drift-control-card,
+[data-theme="light"] .drift-stat-grid,
+[data-theme="light"] .drift-box,
+[data-theme="light"] .method-card,
+[data-theme="light"] .formula-box,
+[data-theme="light"] .cache-status-card,
+[data-theme="light"] .export-bundle-card,
+[data-theme="light"] .data-table {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
 [data-theme="light"] .floating-dock-right .nav-tabs {
   background: #e2e8f0;
   border: 1px solid #cbd5e1;
@@ -3630,4 +3748,137 @@ html, body {
   border: 1px solid #e2e8f0;
   color: #0f172a;
 }
+
+/* ==========================================================================
+   MASTER THEME OVERRIDES (Guarantees Total White/Black Surface Synchronization)
+   ========================================================================== */
+
+/* Light Mode: 100% Crisp White Background & High-Contrast Black/Dark Text */
+[data-theme="light"] body,
+[data-theme="light"] body.tactical-c4isr,
+[data-theme="light"] .tactical-c4isr {
+  background-color: #f4f6f9 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] #map,
+[data-theme="light"] .tactical-map-viewport,
+[data-theme="light"] .leaflet-container {
+  background: #f8fafc !important;
+}
+
+[data-theme="light"] .floating-dock-left,
+[data-theme="light"] .floating-dock-right,
+[data-theme="light"] .tactical-flight-deck {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1) !important;
+}
+
+[data-theme="light"] .dock-scroll-body,
+[data-theme="light"] .dock-content-body {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .pane-section {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="light"] .pane-hdr {
+  color: #0f172a !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .threat-gauge-card,
+[data-theme="light"] .slick-banner-box,
+[data-theme="light"] .checkpoint-box,
+[data-theme="light"] .drift-control-card,
+[data-theme="light"] .drift-stat-grid,
+[data-theme="light"] .drift-box,
+[data-theme="light"] .method-card,
+[data-theme="light"] .formula-box,
+[data-theme="light"] .cache-status-card,
+[data-theme="light"] .export-bundle-card,
+[data-theme="light"] .data-table {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .scene-card-btn,
+[data-theme="light"] .vessel-card,
+[data-theme="light"] .stat-box,
+[data-theme="light"] .param-input-group {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+[data-theme="light"] .scene-card-btn:hover,
+[data-theme="light"] .vessel-card:hover {
+  background: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+}
+
+[data-theme="light"] .scene-card-btn.active {
+  background: #f0fdf4 !important;
+  border: 1px solid #059669 !important;
+  border-left: 4px solid #059669 !important;
+}
+
+[data-theme="light"] .vessel-card.active {
+  background: #f0fdf4 !important;
+  border-color: #16a34a !important;
+  border-left: 4px solid #16a34a !important;
+}
+
+[data-theme="light"] .kv-row {
+  color: #475569 !important;
+  border-bottom: 1px dashed #e2e8f0 !important;
+}
+
+[data-theme="light"] .kv-row strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .sc-title,
+[data-theme="light"] .v-name,
+[data-theme="light"] .dock-title,
+[data-theme="light"] .brand-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .param-input-group input {
+  color: #0f172a !important;
+}
+
+/* Dark Mode: 100% Pure Tactical Black Background & Glowing Obsidian */
+[data-theme="dark"] body,
+[data-theme="dark"] body.tactical-c4isr,
+[data-theme="dark"] .tactical-c4isr {
+  background-color: #000000 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] #map,
+[data-theme="dark"] .tactical-map-viewport,
+[data-theme="dark"] .leaflet-container {
+  background: #000000 !important;
+}
+
+[data-theme="dark"] .floating-dock-left,
+[data-theme="dark"] .floating-dock-right,
+[data-theme="dark"] .tactical-flight-deck {
+  background: linear-gradient(165deg, rgba(14, 6, 24, 0.97) 0%, rgba(4, 2, 7, 0.99) 100%) !important;
+  border: 1px solid #371852 !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9) !important;
+}
+
+[data-theme="dark"] .pane-section {
+  background: linear-gradient(145deg, #150a24 0%, #0c0516 100%) !important;
+  border: 1px solid rgba(91, 44, 131, 0.5) !important;
+}
+
 

@@ -73,7 +73,8 @@ window.addEventListener("hashchange", handleUrlRouting);
 
 function initThemeToggle() {
   const btn = document.getElementById("btn-theme-toggle");
-  const saved = localStorage.getItem("seasentinel_theme") || "dark";
+  const params = new URLSearchParams(window.location.search || window.location.hash.replace(/^#/, "?"));
+  const saved = params.get("theme") || localStorage.getItem("seasentinel_theme") || "dark";
   applyTheme(saved);
 
   if (btn) {
@@ -94,7 +95,13 @@ function applyTheme(theme) {
   if (lbl) {
     lbl.textContent = theme === "light" ? "LIGHT" : "DARK";
   }
+  if (window.map && typeof setBasemap === "function") {
+    setBasemap(theme === "light" ? "osm" : "dark");
+  }
 }
+
+window.applyTheme = applyTheme;
+window.setBasemap = setBasemap;
 
 function handleUrlRouting() {
   const raw = window.location.search || window.location.hash.replace(/^#/, "?");
@@ -184,9 +191,11 @@ function initMap() {
     zoomControl: false,
     attributionControl: false,
   });
+  window.map = map;
 
-  // Default to stunning ocean bathymetry basemap (No API key required!)
-  setBasemap("ocean");
+  // Match initial basemap to active theme (OSM for Light, Stealth Dark for Dark)
+  const activeTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  setBasemap(activeTheme === "light" ? "osm" : "dark");
 
   // Position Zoom Control top-right
   L.control.zoom({ position: "topright" }).addTo(map);

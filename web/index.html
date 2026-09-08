@@ -10,10 +10,35 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <!-- Custom Tactical Console Stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=2.2" />
   <script>
+    window.applyThemeToDocument = function(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (document.body) {
+        document.body.classList.remove('theme-dark', 'theme-light');
+        document.body.classList.add(theme === 'light' ? 'theme-light' : 'theme-dark');
+      }
+      var lbl = document.getElementById('theme-mode-text');
+      if (lbl) lbl.textContent = theme === 'light' ? 'LIGHT' : 'DARK';
+      if (window.map && typeof window.setBasemap === 'function') {
+        window.setBasemap(theme === 'light' ? 'osm' : 'dark');
+      }
+    };
+
+    window.toggleTheme = function() {
+      var current = document.documentElement.getAttribute('data-theme') || 'dark';
+      var next = current === 'dark' ? 'light' : 'dark';
+      window.applyThemeToDocument(next);
+      try { localStorage.setItem('seasentinel_theme', next); } catch(e) {}
+    };
+
     (function() {
-      var saved = localStorage.getItem('seasentinel_theme') || 'dark';
+      var params = new URLSearchParams(window.location.search || window.location.hash.replace(/^#/, '?'));
+      var saved = params.get('theme');
+      if (!saved) {
+        try { saved = localStorage.getItem('seasentinel_theme'); } catch(e) {}
+      }
+      saved = saved || 'dark';
       document.documentElement.setAttribute('data-theme', saved);
     })();
   </script>
@@ -55,7 +80,7 @@
 
     <!-- Right Controls: Theme Toggle, Search, UTC Clock & System Status -->
     <div class="hdr-right">
-      <button id="btn-theme-toggle" class="btn-theme-toggle" title="Switch Theme (Light / Dark Mode)" aria-label="Toggle Theme">
+      <button id="btn-theme-toggle" class="btn-theme-toggle" onclick="toggleTheme()" title="Switch Theme (Light / Dark Mode)" aria-label="Toggle Theme">
         <span class="theme-icon-wrap">
           <i class="fa-solid fa-moon icon-theme-dark"></i>
           <i class="fa-solid fa-sun icon-theme-light"></i>
@@ -657,6 +682,6 @@
   <!-- Leaflet GIS JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <!-- Main Application Logic & GIS Controller -->
-  <script src="app.js"></script>
+  <script src="app.js?v=2.2"></script>
 </body>
 </html>
