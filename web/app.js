@@ -55,8 +55,8 @@ const PALETTE = {
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", async () => {
-  initThemeToggle();
   initMap();
+  initThemeToggle();
   initClock();
   initTabNavigation();
   initLayerToggles();
@@ -89,13 +89,15 @@ function initThemeToggle() {
 
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
-  document.body.classList.remove("theme-dark", "theme-light");
-  document.body.classList.add(theme === "light" ? "theme-light" : "theme-dark");
+  if (document.body) {
+    document.body.classList.remove("theme-dark", "theme-light");
+    document.body.classList.add(theme === "light" ? "theme-light" : "theme-dark");
+  }
   const lbl = document.getElementById("theme-mode-text");
   if (lbl) {
     lbl.textContent = theme === "light" ? "LIGHT" : "DARK";
   }
-  if (window.map && typeof setBasemap === "function") {
+  if (map && typeof setBasemap === "function") {
     setBasemap(theme === "light" ? "osm" : "dark");
   }
 }
@@ -165,6 +167,7 @@ const BASEMAPS = {
 };
 
 function setBasemap(key) {
+  if (!map || typeof map.addLayer !== "function") return;
   if (currentBasemap && map.hasLayer(currentBasemap)) {
     map.removeLayer(currentBasemap);
   }
@@ -191,6 +194,7 @@ function initMap() {
     zoomControl: false,
     attributionControl: false,
   });
+  window.leafletMap = map;
   window.map = map;
 
   // Match initial basemap to active theme (OSM for Light, Stealth Dark for Dark)

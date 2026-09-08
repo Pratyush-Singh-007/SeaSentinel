@@ -10,7 +10,7 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <!-- Custom Tactical Console Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.2" />
+  <link rel="stylesheet" href="style.css?v=2.3" />
   <script>
     window.applyThemeToDocument = function(theme) {
       document.documentElement.setAttribute('data-theme', theme);
@@ -20,7 +20,7 @@
       }
       var lbl = document.getElementById('theme-mode-text');
       if (lbl) lbl.textContent = theme === 'light' ? 'LIGHT' : 'DARK';
-      if (window.map && typeof window.setBasemap === 'function') {
+      if (window.leafletMap && typeof window.setBasemap === 'function') {
         window.setBasemap(theme === 'light' ? 'osm' : 'dark');
       }
     };
@@ -28,7 +28,11 @@
     window.toggleTheme = function() {
       var current = document.documentElement.getAttribute('data-theme') || 'dark';
       var next = current === 'dark' ? 'light' : 'dark';
-      window.applyThemeToDocument(next);
+      if (typeof window.applyTheme === 'function') {
+        window.applyTheme(next);
+      } else {
+        window.applyThemeToDocument(next);
+      }
       try { localStorage.setItem('seasentinel_theme', next); } catch(e) {}
     };
 
@@ -682,6 +686,6 @@
   <!-- Leaflet GIS JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <!-- Main Application Logic & GIS Controller -->
-  <script src="app.js?v=2.2"></script>
+  <script src="app.js?v=2.3"></script>
 </body>
 </html>
