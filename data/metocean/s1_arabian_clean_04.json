@@ -1,0 +1,15 @@
+{
+  "scene_id": "s1_arabian_clean_04",
+  "bbox": [
+    71.5488,
+    19.5988,
+    71.6512,
+    19.7012
+  ],
+  "source": "INCOIS_OOM_CMEMS_HYCOM",
+  "u_current": 0.2,
+  "v_current": 0.15,
+  "u_wind": 4.6,
+  "v_wind": 3.2,
+  "description": "Arabian Sea offshore pre-monsoon surface circulation"
+}

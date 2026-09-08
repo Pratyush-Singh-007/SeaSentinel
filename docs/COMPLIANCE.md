@@ -1,0 +1,18 @@
+# SeaSentinel: SIH26143 Problem Statement Compliance & Verification Matrix
+
+This matrix links each clause of **Smart India Hackathon Problem Statement 26143 (NTRO)** directly to the SeaSentinel implementation, algorithmic formulation, and automated test assertions.
+
+| Clause | Requirement | SeaSentinel Implementation | Verification Test | Result |
+| :--- | :--- | :--- | :--- | :--- |
+| **Clause (a)** | Detect and characterise oil spill in SAR imagery | `seasentinel/ml/infer.py` (PyTorch U-Net & adaptive dB baseline over 512px sliding tiles with cosine-tapered stitching) | `tests/test_pipeline.py::test_geometry_metrics` | **PASS** |
+| **Clause (a)** | Calculate geometric properties (area, perimeter, orientation, etc.) | `seasentinel/geo/geometry.py` (LocalAEQD Moore boundary trace, PCA orientation, bounding box, compactness) | `tests/test_pipeline.py::test_geometry_metrics` | **PASS** |
+| **Clause (a)** | Estimate age if feasible | `seasentinel/pipeline.py` (Advective reverse drift hours between origin convergence and radar pass; labeled physical drift proxy) | `tests/test_pipeline.py::test_probe_pipeline_execution` | **PASS** |
+| **Clause (a)** | Reject look-alikes & false positives | `seasentinel/ml/infer.py` (Multi-threshold morphology and backscatter contrast span check; clean-scene detection) | `tests/test_pipeline.py::test_geometry_metrics` | **PASS** |
+| **Clause (a)** | Multispectral EO Corroboration | `seasentinel/eo/corroborate.py` (Sentinel-2 L2A co-registered optical chip footprint contrast validation) | `tests/test_pipeline.py::test_probe_pipeline_execution` | **PASS** |
+| **Clause (b)** | Oceanographic & meteorological integration | `seasentinel/drift/fields.py` (ERA5 10m wind fields + CMEMS surface current velocity grids, bilinear spatial & linear temporal) | `tests/test_pipeline.py::test_drift_rk2_reversibility` | **PASS** |
+| **Clause (b)** | Trace slick back to origin point and time | `seasentinel/drift/advection.py` (Lagrangian backward advection with RK2 midpoint integration, 50-particle ensemble, origin trigger) | `tests/test_pipeline.py::test_drift_rk2_reversibility` | **PASS** |
+| **Clause (b)** | Predict future flow of the slick | `seasentinel/drift/cones.py` & `coast.py` (Forward RK2 advection, 90th percentile swept cone, threatened polygon, coastline impact) | `tests/test_pipeline.py::test_playback_kinematics_data` | **PASS** |
+| **Clause (c)** | Ingest historic AIS data & reconstruct traffic | `seasentinel/ais/ingest.py` & `interpolate.py` (MarineCadastre schema in SQLite, 1-minute LocalAEQD interpolation, gap flagging) | `tests/test_pipeline.py::test_crs_math` | **PASS** |
+| **Clause (c)** | Filter out irrelevant traffic | `seasentinel/ais/filter.py` (Spatio-temporal bounding box & origin window funnel pruning vessels outside radius/window) | `tests/test_pipeline.py::test_probe_pipeline_execution` | **PASS** |
+| **Clause (c)** | Score suspects on proximity, trajectory, and behaviour | `seasentinel/ais/score.py` (5-factor explainable score: S_prox, S_time, S_traj, S_type, S_beh, plus dead-reckoning confidence C_track) | `tests/test_pipeline.py::test_score_track_explainability` | **PASS** |
+| **UI/UX** | Suitable visual interface | `web/` (Interactive tactical GIS dashboard with Leaflet, multi-layer toggles, timeline player, suspect leaderboard, PDF export) | `tests/test_pipeline.py::test_frontend_basemaps_and_tactical_assets` | **PASS** |

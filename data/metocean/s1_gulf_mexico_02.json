@@ -1,0 +1,15 @@
+{
+  "scene_id": "s1_gulf_mexico_02",
+  "bbox": [
+    -89.4012,
+    28.3988,
+    -89.2988,
+    28.5012
+  ],
+  "source": "NOAA_ERA5_NCOM",
+  "u_current": 0.28,
+  "v_current": -0.12,
+  "u_wind": 5.2,
+  "v_wind": -2.1,
+  "description": "Gulf of Mexico Loop Current boundary eddy and southeasterly trades"
+}

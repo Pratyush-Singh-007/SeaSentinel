@@ -1,0 +1,262 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="100%" height="100%" style="background-color: #0b0414; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#11061f"/>
+      <stop offset="100%" stop-color="#08020d"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#210c38"/>
+      <stop offset="100%" stop-color="#140624"/>
+    </linearGradient>
+    <linearGradient id="cyanCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b2b3a"/>
+      <stop offset="100%" stop-color="#081a24"/>
+    </linearGradient>
+    <linearGradient id="mintCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e3328"/>
+      <stop offset="100%" stop-color="#08211a"/>
+    </linearGradient>
+    <linearGradient id="amberCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3d2206"/>
+      <stop offset="100%" stop-color="#241403"/>
+    </linearGradient>
+
+    <!-- Glow Filters -->
+    <filter id="glowMint" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glowPurple" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Arrow Marker -->
+    <marker id="arrowMint" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#6ED6B1"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#A78BFA"/>
+    </marker>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="820" fill="url(#bgGrad)" />
+
+  <!-- Subtle Blueprint Grid -->
+  <g stroke="#26103f" stroke-width="0.5" opacity="0.4">
+    <line x1="0" y1="70" x2="1200" y2="70" />
+    <line x1="0" y1="230" x2="1200" y2="230" />
+    <line x1="0" y1="460" x2="1200" y2="460" />
+    <line x1="0" y1="650" x2="1200" y2="650" />
+    <line x1="300" y1="0" x2="300" y2="820" stroke-dasharray="4,4"/>
+    <line x1="600" y1="0" x2="600" y2="820" stroke-dasharray="4,4"/>
+    <line x1="900" y1="0" x2="900" y2="820" stroke-dasharray="4,4"/>
+  </g>
+
+  <!-- ========================================================================
+       HEADER TITLE BAR
+       ======================================================================== -->
+  <g id="Header">
+    <rect x="25" y="15" width="1150" height="50" rx="8" fill="#1b082e" stroke="#5B2C83" stroke-width="1.5" />
+    <circle cx="50" cy="40" r="10" fill="#6ED6B1" filter="url(#glowMint)" />
+    <circle cx="50" cy="40" r="4" fill="#08211a" />
+    <text x="75" y="46" fill="#6ED6B1" font-size="18" font-weight="900" letter-spacing="1.5">SEASENTINEL</text>
+    <text x="215" y="45" fill="#D8D3CE" font-size="13" font-weight="500">| END-TO-END MARITIME SATELLITE SURVEILLANCE &amp; AIS ATTRIBUTION ARCHITECTURE</text>
+    <rect x="1000" y="25" width="155" height="30" rx="15" fill="#2d134d" stroke="#6ED6B1" stroke-width="1" />
+    <text x="1077" y="44" fill="#6ED6B1" font-size="11" font-weight="800" text-anchor="middle">SIH26143 · NTRO</text>
+  </g>
+
+  <!-- ========================================================================
+       LAYER 1: SENSORS & INGESTION FEEDS (TOP)
+       ======================================================================== -->
+  <g id="Layer1-Ingestion">
+    <!-- Section Label -->
+    <rect x="25" y="80" width="220" height="24" rx="4" fill="#5B2C83" />
+    <text x="35" y="96" fill="#fff" font-size="11" font-weight="800" letter-spacing="0.5">LAYER 1: MULTI-SOURCE INGESTION</text>
+
+    <!-- Source Card 1: Sentinel-1 SAR -->
+    <rect x="30" y="115" width="265" height="100" rx="8" fill="url(#purpleCard)" stroke="#5B2C83" stroke-width="1.2" />
+    <rect x="40" y="125" width="24" height="24" rx="4" fill="#5B2C83" />
+    <text x="52" y="141" fill="#6ED6B1" font-size="13" font-weight="bold" text-anchor="middle">🛰️</text>
+    <text x="72" y="139" fill="#6ED6B1" font-size="13" font-weight="800">Satellite SAR (Sentinel-1)</text>
+    <text x="72" y="154" fill="#A8A29D" font-size="10.5">C-band IW GRD (10m RTC Resolution)</text>
+    <text x="40" y="177" fill="#D8D3CE" font-size="10">• Calibrated Sigma0 (dB) Backscatter</text>
+    <text x="40" y="193" fill="#D8D3CE" font-size="10">• VV/VH Surface Capillary Wave Damping</text>
+    <text x="40" y="207" fill="#D8D3CE" font-size="10">• 24/7 Day/Night All-Weather Imaging</text>
+
+    <!-- Source Card 2: Optical Sentinel-2 -->
+    <rect x="325" y="115" width="265" height="100" rx="8" fill="url(#purpleCard)" stroke="#5B2C83" stroke-width="1.2" />
+    <rect x="335" y="125" width="24" height="24" rx="4" fill="#5B2C83" />
+    <text x="347" y="141" fill="#6ED6B1" font-size="13" font-weight="bold" text-anchor="middle">📷</text>
+    <text x="367" y="139" fill="#6ED6B1" font-size="13" font-weight="800">Optical Corroboration</text>
+    <text x="367" y="154" fill="#A8A29D" font-size="10.5">Sentinel-2 MSI (Level-2A Surface Refl.)</text>
+    <text x="335" y="177" fill="#D8D3CE" font-size="10">• False-Positive Algae/Sargassum Filter</text>
+    <text x="335" y="193" fill="#D8D3CE" font-size="10">• Sunglint Texture Contrast Extraction</text>
+    <text x="335" y="207" fill="#D8D3CE" font-size="10">• Cloud-Masking &amp; Multi-Band Index</text>
+
+    <!-- Source Card 3: Metocean Hydrodynamics -->
+    <rect x="615" y="115" width="265" height="100" rx="8" fill="url(#cyanCard)" stroke="#0284c7" stroke-width="1.2" />
+    <rect x="625" y="125" width="24" height="24" rx="4" fill="#0284c7" />
+    <text x="637" y="141" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">🌊</text>
+    <text x="657" y="139" fill="#38bdf8" font-size="13" font-weight="800">Metocean Oceanography</text>
+    <text x="657" y="154" fill="#A8A29D" font-size="10.5">Copernicus CMEMS &amp; Open-Meteo ERA5</text>
+    <text x="625" y="177" fill="#D8D3CE" font-size="10">• Synoptic 10m Wind Fields (U10, V10)</text>
+    <text x="625" y="193" fill="#D8D3CE" font-size="10">• Ocean Surface Current Vectors (U, V)</text>
+    <text x="625" y="207" fill="#D8D3CE" font-size="10">• Spatio-Temporal Bicubic Interpolation</text>
+
+    <!-- Source Card 4: AIS Maritime Traffic Store -->
+    <rect x="905" y="115" width="265" height="100" rx="8" fill="url(#mintCard)" stroke="#059669" stroke-width="1.2" />
+    <rect x="915" y="125" width="24" height="24" rx="4" fill="#059669" />
+    <text x="927" y="141" fill="#6ED6B1" font-size="13" font-weight="bold" text-anchor="middle">🚢</text>
+    <text x="947" y="139" fill="#6ED6B1" font-size="13" font-weight="800">AIS Maritime Telemetry</text>
+    <text x="947" y="154" fill="#A8A29D" font-size="10.5">Satellite + Terrestrial AIS Store</text>
+    <text x="915" y="177" fill="#D8D3CE" font-size="10">• ITU-R M.1371 Transponder Feed</text>
+    <text x="915" y="193" fill="#D8D3CE" font-size="10">• SQLite Indexed Pos: MMSI, SOG, COG</text>
+    <text x="915" y="207" fill="#D8D3CE" font-size="10">• MarineCadastre Format Compliance</text>
+  </g>
+
+  <!-- Connectors Layer 1 -> Layer 2 -->
+  <path d="M 160 215 L 160 255 L 260 255 L 260 275" fill="none" stroke="#6ED6B1" stroke-width="1.5" marker-end="url(#arrowMint)"/>
+  <path d="M 457 215 L 457 255 L 280 255 L 280 275" fill="none" stroke="#6ED6B1" stroke-width="1.5" marker-end="url(#arrowMint)"/>
+  <path d="M 747 215 L 747 275" fill="none" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrowMint)"/>
+  <path d="M 1037 215 L 1037 275" fill="none" stroke="#6ED6B1" stroke-width="1.5" marker-end="url(#arrowMint)"/>
+
+  <!-- ========================================================================
+       LAYER 2: CORE ANALYTIC & PHYSICS ENGINES (MIDDLE)
+       ======================================================================== -->
+  <g id="Layer2-CoreEngines">
+    <!-- Section Label -->
+    <rect x="25" y="245" width="220" height="24" rx="4" fill="#5B2C83" />
+    <text x="35" y="261" fill="#fff" font-size="11" font-weight="800" letter-spacing="0.5">LAYER 2: ANALYTICAL &amp; AI ENGINES</text>
+
+    <!-- Engine 1: Computer Vision & AI Segmentation -->
+    <rect x="30" y="280" width="350" height="165" rx="8" fill="url(#purpleCard)" stroke="#5B2C83" stroke-width="1.5" />
+    <text x="45" y="305" fill="#6ED6B1" font-size="14" font-weight="800">1. Slick Detection &amp; Characterisation</text>
+    <text x="45" y="322" fill="#A8A29D" font-size="10.5">Clause (a) Mandate Implementation</text>
+    <line x1="45" y1="330" x2="365" y2="330" stroke="#3e1a63" stroke-width="1"/>
+    <text x="45" y="348" fill="#D8D3CE" font-size="10.5">• <tspan fill="#6ED6B1" font-weight="bold">PyTorch U-Net</tspan> Architecture (Skip Connections)</text>
+    <text x="45" y="366" fill="#D8D3CE" font-size="10.5">• Adaptive Otsu &amp; Sliding Window Inference</text>
+    <text x="45" y="384" fill="#D8D3CE" font-size="10.5">• Boundary Trace (Moore-Neighbor &amp; Douglas-Peucker)</text>
+    <text x="45" y="402" fill="#D8D3CE" font-size="10.5">• Physical Morphometry: Area, Perimeter, Length, Width</text>
+    <text x="45" y="420" fill="#D8D3CE" font-size="10.5">• Bonn Thickness Code &amp; Volume Estimation</text>
+    <rect x="255" y="425" width="115" height="15" rx="3" fill="#1b082e" stroke="#6ED6B1" stroke-width="0.8"/>
+    <text x="312" y="436" fill="#6ED6B1" font-size="8.5" font-weight="bold" text-anchor="middle">IoU: 0.5891 | Acc: 98.44%</text>
+
+    <!-- Engine 2: Hydrodynamic Lagrangian Drift -->
+    <rect x="420" y="280" width="360" height="165" rx="8" fill="url(#cyanCard)" stroke="#0284c7" stroke-width="1.5" />
+    <text x="435" y="305" fill="#38bdf8" font-size="14" font-weight="800">2. Lagrangian Drift Advection</text>
+    <text x="435" y="322" fill="#A8A29D" font-size="10.5">Clause (b) Mandate Implementation</text>
+    <line x1="435" y1="330" x2="765" y2="330" stroke="#0c4a6e" stroke-width="1"/>
+    <text x="435" y="348" fill="#D8D3CE" font-size="10.5">• <tspan fill="#38bdf8" font-weight="bold">RK2 Midpoint Integration</tspan> in LocalAEQD frame</text>
+    <text x="435" y="366" fill="#D8D3CE" font-size="10.5">• Drift: V = U_curr + α·R(θ)·W_10m (Leeway α = 0.03)</text>
+    <text x="435" y="384" fill="#D8D3CE" font-size="10.5">• <tspan fill="#f59e0b" font-weight="bold">Hindcasting (Δt &lt; 0):</tspan> Reverse time to Origin Zone</text>
+    <text x="435" y="402" fill="#D8D3CE" font-size="10.5">• <tspan fill="#38bdf8" font-weight="bold">Forecasting (Δt &gt; 0):</tspan> Project forward trajectory</text>
+    <text x="435" y="420" fill="#D8D3CE" font-size="10.5">• Ensemble Dispersion Cones (90th Percentile spread)</text>
+    <rect x="645" y="425" width="125" height="15" rx="3" fill="#082030" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="707" y="436" fill="#38bdf8" font-size="8.5" font-weight="bold" text-anchor="middle">R_trigger = 6.0 km Origin</text>
+
+    <!-- Engine 3: AIS Trajectory Funnel -->
+    <rect x="820" y="280" width="350" height="165" rx="8" fill="url(#mintCard)" stroke="#059669" stroke-width="1.5" />
+    <text x="835" y="305" fill="#6ED6B1" font-size="14" font-weight="800">3. Spatio-Temporal AIS Funnel</text>
+    <text x="835" y="322" fill="#A8A29D" font-size="10.5">Clause (c) Mandate Implementation</text>
+    <line x1="835" y1="330" x2="1155" y2="330" stroke="#064e3b" stroke-width="1"/>
+    <text x="835" y="348" fill="#D8D3CE" font-size="10.5">• Dynamic Search Bounding Box around Origin Zone</text>
+    <text x="835" y="366" fill="#D8D3CE" font-size="10.5">• 1-Minute Grid Trajectory Resampling (LocalAEQD)</text>
+    <text x="835" y="384" fill="#D8D3CE" font-size="10.5">• <tspan fill="#f87171" font-weight="bold">Dead-Reckoning Algorithm</tspan> for AIS Gaps (≥30m)</text>
+    <text x="835" y="402" fill="#D8D3CE" font-size="10.5">• Closest Point of Approach (CPA) Distance Matrix</text>
+    <text x="835" y="420" fill="#D8D3CE" font-size="10.5">• ITU-R M.1371 Ship Type Classification Priors</text>
+    <rect x="1035" y="425" width="125" height="15" rx="3" fill="#062b20" stroke="#6ED6B1" stroke-width="0.8"/>
+    <text x="1097" y="436" fill="#6ED6B1" font-size="8.5" font-weight="bold" text-anchor="middle">Dark Ship Gap Detection</text>
+  </g>
+
+  <!-- Connectors Layer 2 -> Layer 3 -->
+  <path d="M 205 445 L 205 485 L 500 485 L 500 500" fill="none" stroke="#6ED6B1" stroke-width="1.5" marker-end="url(#arrowMint)"/>
+  <path d="M 600 445 L 600 500" fill="none" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrowMint)"/>
+  <path d="M 995 445 L 995 485 L 700 485 L 700 500" fill="none" stroke="#6ED6B1" stroke-width="1.5" marker-end="url(#arrowMint)"/>
+
+  <!-- ========================================================================
+       LAYER 3: EXPLAINABLE MULTI-CRITERIA ATTRIBUTION ENGINE
+       ======================================================================== -->
+  <g id="Layer3-Attribution">
+    <!-- Section Label -->
+    <rect x="25" y="475" width="260" height="24" rx="4" fill="#5B2C83" />
+    <text x="35" y="491" fill="#fff" font-size="11" font-weight="800" letter-spacing="0.5">LAYER 3: FUSION &amp; ATTRIBUTION SCORING</text>
+
+    <!-- Master Attribution Container -->
+    <rect x="30" y="505" width="1140" height="125" rx="8" fill="url(#purpleCard)" stroke="#5B2C83" stroke-width="1.5" />
+
+    <text x="45" y="530" fill="#6ED6B1" font-size="14" font-weight="800">Multi-Criteria Threat Scoring Formula: Score = 100 × ( Σ w_i · S_i / Σ w_i ) × C_track</text>
+    <text x="45" y="546" fill="#A8A29D" font-size="10.5">Court-Defensible, Physics-Informed Maritime Evidence Matrix</text>
+
+    <!-- Metric 1 -->
+    <rect x="45" y="560" width="210" height="60" rx="6" fill="#1b082e" stroke="#5B2C83" stroke-width="1"/>
+    <text x="55" y="578" fill="#6ED6B1" font-size="11" font-weight="bold">1. Proximity Match (30%)</text>
+    <text x="55" y="594" fill="#A8A29D" font-size="9">S_prox = exp(-d_origin / R_zone)</text>
+    <text x="55" y="608" fill="#D8D3CE" font-size="9.5">Distance to estimated spill origin</text>
+
+    <!-- Metric 2 -->
+    <rect x="270" y="560" width="210" height="60" rx="6" fill="#1b082e" stroke="#5B2C83" stroke-width="1"/>
+    <text x="280" y="578" fill="#6ED6B1" font-size="11" font-weight="bold">2. Temporal Intercept (20%)</text>
+    <text x="280" y="594" fill="#A8A29D" font-size="9">S_time = exp(-|Δt| / 1.5h)</text>
+    <text x="280" y="608" fill="#D8D3CE" font-size="9.5">Time coincidence at release moment</text>
+
+    <!-- Metric 3 -->
+    <rect x="495" y="560" width="210" height="60" rx="6" fill="#1b082e" stroke="#5B2C83" stroke-width="1"/>
+    <text x="505" y="578" fill="#6ED6B1" font-size="11" font-weight="bold">3. Drift Alignment (25%)</text>
+    <text x="505" y="594" fill="#A8A29D" font-size="9">S_traj = 1.0 (if |Δθ| ≤ 45°) else 0.4</text>
+    <text x="505" y="608" fill="#D8D3CE" font-size="9.5">Ship heading vs. Metocean drift</text>
+
+    <!-- Metric 4 -->
+    <rect x="720" y="560" width="210" height="60" rx="6" fill="#1b082e" stroke="#5B2C83" stroke-width="1"/>
+    <text x="730" y="578" fill="#6ED6B1" font-size="11" font-weight="bold">4. Vessel Type Prior (15%)</text>
+    <text x="730" y="594" fill="#A8A29D" font-size="9">Crude=1.0 | Chem=0.85 | Cargo=0.7</text>
+    <text x="730" y="608" fill="#D8D3CE" font-size="9.5">Cargo DWT &amp; fuel pollution risk</text>
+
+    <!-- Metric 5 -->
+    <rect x="945" y="560" width="210" height="60" rx="6" fill="#1b082e" stroke="#5B2C83" stroke-width="1"/>
+    <text x="955" y="578" fill="#f87171" font-size="11" font-weight="bold">5. Track Gap Penalty (10%)</text>
+    <text x="955" y="594" fill="#A8A29D" font-size="9">S_gap = 1.0 (if gap &gt; 30m) else 0.0</text>
+    <text x="955" y="608" fill="#D8D3CE" font-size="9.5">Penalizes deliberate AIS silence</text>
+  </g>
+
+  <!-- Connectors Layer 3 -> Layer 4 -->
+  <path d="M 600 630 L 600 660" fill="none" stroke="#6ED6B1" stroke-width="1.8" marker-end="url(#arrowMint)"/>
+
+  <!-- ========================================================================
+       LAYER 4: INTERFACE & OPERATIONAL DELIVERABLES (BOTTOM)
+       ======================================================================== -->
+  <g id="Layer4-Deliverables">
+    <!-- Section Label -->
+    <rect x="25" y="645" width="260" height="24" rx="4" fill="#5B2C83" />
+    <text x="35" y="661" fill="#fff" font-size="11" font-weight="800" letter-spacing="0.5">LAYER 4: C4ISR CONSOLE &amp; ENFORCEMENT</text>
+
+    <!-- Deliverable 1: Tactical Map Console -->
+    <rect x="30" y="675" width="360" height="120" rx="8" fill="url(#purpleCard)" stroke="#5B2C83" stroke-width="1.2" />
+    <text x="45" y="698" fill="#6ED6B1" font-size="13" font-weight="800">Tactical GIS Command Console</text>
+    <text x="45" y="718" fill="#D8D3CE" font-size="10.5">• Full-Bleed 100vw Leaflet Geospatial View</text>
+    <text x="45" y="734" fill="#D8D3CE" font-size="10.5">• Dynamic Nautical Range Rings (5/10/15 NM)</text>
+    <text x="45" y="750" fill="#D8D3CE" font-size="10.5">• Vessel HUD Callouts &amp; Metocean Vectors</text>
+    <text x="45" y="766" fill="#D8D3CE" font-size="10.5">• 4 Basemaps: Ocean, Dark, Satellite, OSM</text>
+    <text x="45" y="782" fill="#A8A29D" font-size="10">Sub-second execution: ~132.5 ms latency</text>
+
+    <!-- Deliverable 2: 4D Temporal Timeline Engine -->
+    <rect x="420" y="675" width="360" height="120" rx="8" fill="url(#purpleCard)" stroke="#5B2C83" stroke-width="1.2" />
+    <text x="435" y="698" fill="#6ED6B1" font-size="13" font-weight="800">4D Lagrangian Flight Deck</text>
+    <text x="435" y="718" fill="#D8D3CE" font-size="10.5">• Interactive Timeline Scrubber (-12h to +24h)</text>
+    <text x="435" y="734" fill="#D8D3CE" font-size="10.5">• Dynamic Simulation Speed: 1x, 2x, 4x Playback</text>
+    <text x="435" y="750" fill="#D8D3CE" font-size="10.5">• Synchronized Vessel Movement &amp; Intercepts</text>
+    <text x="435" y="766" fill="#D8D3CE" font-size="10.5">• Live Depth (-74m), SST (28.4°C), &amp; Wind/Current</text>
+    <text x="435" y="782" fill="#A8A29D" font-size="10">Real-Time Cursor Geolocation Crosshairs</text>
+
+    <!-- Deliverable 3: Legal Forensics Deliverables -->
+    <rect x="810" y="675" width="360" height="120" rx="8" fill="url(#purpleCard)" stroke="#5B2C83" stroke-width="1.2" />
+    <text x="825" y="698" fill="#6ED6B1" font-size="13" font-weight="800">Legal &amp; Law Enforcement Exports</text>
+    <text x="825" y="718" fill="#D8D3CE" font-size="10.5">• <tspan fill="#f59e0b" font-weight="bold">Forensic Attribution Note (PDF):</tspan> Court Dossier</text>
+    <text x="825" y="734" fill="#D8D3CE" font-size="10.5">• Ranked Suspect Leaderboard &amp; Confidence Dial</text>
+    <text x="825" y="750" fill="#D8D3CE" font-size="10.5">• Standard GIS Feature GeoJSON (ECDIS/ArcGIS)</text>
+    <text x="825" y="766" fill="#D8D3CE" font-size="10.5">• Machine-Readable Audit JSON with Hash</text>
+    <text x="825" y="782" fill="#A8A29D" font-size="10">Direct Interception Evidence for Coast Guard</text>
+  </g>
+</svg>

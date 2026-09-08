@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SeaSentinel — Satellite Oil Spill Detection &amp; AIS Attribution Intelligence Platform</title>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Custom Tactical Console Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark tactical-c4isr">
+
+  <!-- =====================================================================
+       TOP MISSION COMMAND RIBBON
+       ===================================================================== -->
+  <header class="tactical-header">
+    <div class="hdr-left">
+      <div class="brand">
+        <div class="brand-radar-ring">
+          <i class="fa-solid fa-satellite-dish brand-icon"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">SEASENTINEL</span>
+          <span class="brand-sub">MARITIME C4ISR &bull; SATELLITE INTELLIGENCE</span>
+        </div>
+        <span class="badge sih-badge">SIH26143 &bull; NTRO</span>
+      </div>
+    </div>
+
+    <!-- Center Mission Status & Quick Action Controls -->
+    <div class="hdr-center-actions">
+      <button id="btn-run-analysis" class="btn-tactical-execute" title="Trigger Automated Surveillance Pipeline">
+        <i class="fa-solid fa-play"></i> EXECUTE SURVEILLANCE
+      </button>
+      <button id="btn-toggle-probe" class="btn-tactical-probe" title="Probe arbitrary coordinates on map">
+        <i class="fa-solid fa-crosshairs"></i> Probe Coordinates
+      </button>
+      <div class="active-mission-pill" id="active-mission-pill">
+        <span class="pulse-dot"></span>
+        <span id="active-scene-tag">NO SCENE LOADED</span>
+        <span class="divider">|</span>
+        <span id="radar-pass-time" class="time-text">--:-- UTC</span>
+      </div>
+    </div>
+
+    <!-- Right Controls: Search, UTC Clock & System Status -->
+    <div class="hdr-right">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="vessel-search-input" placeholder="Search MMSI or vessel name..." />
+      </div>
+      <div class="utc-clock" id="utc-clock" title="Coordinated Universal Time">
+        <i class="fa-regular fa-clock"></i> UTC 00:00:00
+      </div>
+      <div class="system-status-indicator" id="system-status" title="System Status">
+        <span class="status-dot online"></span>
+        <span class="status-label">READY</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       FULLSCREEN TACTICAL COMMAND STAGE
+       ===================================================================== -->
+  <div class="tactical-stage">
+
+    <!-- FULLSCREEN LEAFLET MAP VIEWPORT -->
+    <div id="map" class="tactical-map-viewport"></div>
+
+    <!-- Mission Telemetry Capsule (Top Left over Map) -->
+    <div class="scene-active-banner" id="scene-active-banner">
+      <div class="banner-top">
+        <i class="fa-solid fa-satellite sensor-ico"></i>
+        <span class="scene-tag-active" id="active-scene-tag-mirror">MISSION SCANNER</span>
+        <span class="scene-coord-indicator" id="active-scene-coords">--.----° N, --.----° E</span>
+      </div>
+      <div class="banner-sub" id="active-scene-sub">
+        Select a scene from the tactical dock or click "Execute Surveillance"
+      </div>
+    </div>
+
+    <!-- Tactical Compass Rose HUD -->
+    <div class="compass-hud" title="True North Orientation">
+      <div class="compass-dial">
+        <div class="compass-arrow"></div>
+        <span class="compass-n">N</span>
+      </div>
+    </div>
+
+    <!-- Quick Camera Action Controls -->
+    <div class="map-camera-actions">
+      <button id="btn-focus-sar" class="btn-camera-action" title="Fit camera to SAR scene &amp; oil slick">
+        <i class="fa-solid fa-crosshairs"></i> Focus SAR
+      </button>
+      <button id="btn-focus-drift" class="btn-camera-action" title="Fit camera to full drift &amp; vessel corridor">
+        <i class="fa-solid fa-arrows-to-dot"></i> Full Drift
+      </button>
+    </div>
+
+    <!-- Live Pipeline Progress Card -->
+    <div id="progress-card" class="progress-card hidden">
+      <div class="progress-header">
+        <i class="fa-solid fa-circle-notch fa-spin progress-spinner"></i>
+        <span id="progress-step" class="progress-step-title">INITIALIZING PIPELINE...</span>
+      </div>
+      <div class="progress-bar-rail">
+        <div id="progress-bar" class="progress-bar-fill" style="width: 5%;"></div>
+      </div>
+      <div id="progress-note" class="progress-subnote">Loading SAR Sigma0 backscatter matrix...</div>
+    </div>
+
+    <!-- =====================================================================
+         FLOATING DOCK 1: LEFT TACTICAL PALETTE (Glassmorphic, Tabbed, Collapsible)
+         ===================================================================== -->
+    <aside class="floating-dock-left" id="dock-left">
+      <div class="dock-header">
+        <div class="dock-title-group">
+          <i class="fa-solid fa-shield-halved dock-title-icon"></i>
+          <span class="dock-title">TACTICAL PALETTE</span>
+        </div>
+        <button class="dock-collapse-btn" id="btn-toggle-left-dock" title="Collapse / Expand Palette">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+      </div>
+
+      <!-- Dock Tab Navigation -->
+      <div class="dock-subnav" id="dock-left-subnav">
+        <button class="dock-subtab-btn active" data-subtab="scenes">
+          <i class="fa-solid fa-satellite"></i> SCENES <span class="dock-counter-pill" id="scenes-count-meta">4</span>
+        </button>
+        <button class="dock-subtab-btn" data-subtab="params">
+          <i class="fa-solid fa-sliders"></i> PARAMS
+        </button>
+        <button class="dock-subtab-btn" data-subtab="layers">
+          <i class="fa-solid fa-layer-group"></i> LAYERS
+        </button>
+        <button class="dock-subtab-btn" data-subtab="sources">
+          <i class="fa-solid fa-database"></i> SOURCES
+        </button>
+      </div>
+
+      <!-- Dock Tab Panels -->
+      <div class="dock-content-body">
+        
+        <!-- SUB-TAB 1: SCENES LIST -->
+        <div class="dock-subpane active" id="pane-tab-scenes">
+          <div class="scene-cards-list" id="scene-cards-list">
+            <div class="loading-placeholder">Loading scene catalog...</div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB 2: RUN PARAMETERS & SUMMARY STATS -->
+        <div class="dock-subpane" id="pane-tab-params">
+          <div class="dock-section-title">ADVECTION &amp; SEARCH CONTROLS</div>
+          <div class="params-grid">
+            <div class="param-input-group">
+              <label for="param-hindcast">HINDCAST H</label>
+              <input type="number" id="param-hindcast" value="12" min="1" max="72" step="1" />
+            </div>
+            <div class="param-input-group">
+              <label for="param-forecast">FORECAST H</label>
+              <input type="number" id="param-forecast" value="24" min="1" max="120" step="1" />
+            </div>
+            <div class="param-input-group">
+              <label for="param-search-radius">SEARCH KM</label>
+              <input type="number" id="param-search-radius" value="25" min="1" max="200" step="1" />
+            </div>
+            <div class="param-input-group">
+              <label for="param-window">WINDOW H</label>
+              <input type="number" id="param-window" value="6" min="1" max="48" step="1" />
+            </div>
+          </div>
+
+          <div class="probe-help-text" style="margin: 8px 0;">
+            Adjust Lagrangian advection time steps and spatial search corridor.
+          </div>
+
+          <div class="dock-section-title" style="margin-top: 14px;">SURVEILLANCE SUMMARY</div>
+          <div class="summary-stat-grid">
+            <div class="stat-box">
+              <div class="stat-num" id="sum-polygons">--</div>
+              <div class="stat-lbl">OIL POLYGONS</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" id="sum-area">--</div>
+              <div class="stat-lbl">TOTAL AREA KM²</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" id="sum-vessels">--</div>
+              <div class="stat-lbl">VESSELS SCORED</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" id="sum-age">--</div>
+              <div class="stat-lbl">AGE H, PROXY</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB 3: LAYERS & BASEMAP -->
+        <div class="dock-subpane" id="pane-tab-layers">
+          <div class="layers-title"><i class="fa-solid fa-earth-americas"></i> BASEMAP (NO API KEY)</div>
+          <div class="basemap-select-group">
+            <select id="basemap-select" class="dropdown-tactical">
+              <option value="ocean" selected>🌊 Ocean Bathymetry (Voyager)</option>
+              <option value="dark">🌌 Stealth Dark Maritime</option>
+              <option value="satellite">🛰️ High-Res Satellite (Esri)</option>
+              <option value="osm">🗺️ Standard Nautical OSM</option>
+            </select>
+          </div>
+
+          <div class="layers-title" style="margin-top: 12px;"><i class="fa-solid fa-layer-group"></i> TACTICAL OVERLAYS</div>
+          <div class="layers-list">
+            <label class="layer-item"><input type="checkbox" id="l-range-rings" checked /> <span class="layer-bullet rings"></span> Range rings (NM)</label>
+            <label class="layer-item"><input type="checkbox" id="l-vessel-huds" checked /> <span class="layer-bullet vhud"></span> Vessel HUD flags</label>
+            <label class="layer-item"><input type="checkbox" id="l-metocean-vec" checked /> <span class="layer-bullet mvec"></span> Drift vectors</label>
+            <label class="layer-item"><input type="checkbox" id="l-opt" /> <span class="layer-bullet opt"></span> Optical (S2)</label>
+            <label class="layer-item"><input type="checkbox" id="l-sar" checked /> <span class="layer-bullet sar"></span> SAR image</label>
+            <label class="layer-item"><input type="checkbox" id="l-mask" checked /> <span class="layer-bullet mask"></span> Class mask</label>
+            <label class="layer-item"><input type="checkbox" id="l-oil" checked /> <span class="layer-bullet oil"></span> Oil polygons</label>
+            <label class="layer-item"><input type="checkbox" id="l-lookalike" checked /> <span class="layer-bullet lookalike"></span> Look-alikes</label>
+            <label class="layer-item"><input type="checkbox" id="l-backtrack" checked /> <span class="layer-bullet backtrack"></span> Backtrack</label>
+            <label class="layer-item"><input type="checkbox" id="l-hindcast-cone" checked /> <span class="layer-bullet hcone"></span> Hindcast cone</label>
+            <label class="layer-item"><input type="checkbox" id="l-release-zone" checked /> <span class="layer-bullet rzone"></span> Release zone</label>
+            <label class="layer-item"><input type="checkbox" id="l-forecast-track" checked /> <span class="layer-bullet ftrack"></span> Forecast track</label>
+            <label class="layer-item"><input type="checkbox" id="l-forecast-cone" checked /> <span class="layer-bullet fcone"></span> Forecast cone</label>
+            <label class="layer-item"><input type="checkbox" id="l-ais" checked /> <span class="layer-bullet ais"></span> AIS tracks</label>
+            <label class="layer-item"><input type="checkbox" id="l-vessel-marks" checked /> <span class="layer-bullet marks"></span> Vessel marks</label>
+          </div>
+        </div>
+
+        <!-- SUB-TAB 4: DATA SOURCES & CACHE -->
+        <div class="dock-subpane" id="pane-tab-sources">
+          <div class="dock-section-title">METOCEAN &amp; SENSOR PIPELINE</div>
+          <div class="sources-list">
+            <div class="source-row"><span>Detector</span><strong id="src-detector">U-Net</strong></div>
+            <div class="source-row"><span>Metocean cubes</span><strong id="src-metocean-cubes">4</strong></div>
+            <div class="source-row"><span>AIS rows</span><strong id="src-ais-rows">13,149</strong></div>
+            <div class="source-row"><span>AIS vessels</span><strong id="src-ais-vessels">45</strong></div>
+            <div class="source-row"><span>Scenes indexed</span><strong id="src-scenes-indexed">4</strong></div>
+            <div class="source-row"><span>Run history</span><strong id="src-history">1.1 MB</strong></div>
+            <div class="source-row"><span>Network</span><strong class="text-emerald">not used at runtime</strong></div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- =====================================================================
+         FLOATING DOCK 2: RIGHT FORENSIC INTELLIGENCE DRAWER (Glassmorphic)
+         ===================================================================== -->
+    <aside class="floating-dock-right" id="dock-right">
+      <div class="dock-header">
+        <button class="dock-collapse-btn" id="btn-toggle-right-dock" title="Collapse / Expand Intelligence Drawer">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <!-- Center Navigation Tabs for the Right Rail View -->
+        <nav class="nav-tabs" id="nav-tabs">
+          <button class="nav-tab-btn active" data-view="investigate">
+            <i class="fa-solid fa-crosshairs"></i> FORENSICS
+          </button>
+          <button class="nav-tab-btn" data-view="drift">
+            <i class="fa-solid fa-wind"></i> DRIFT
+          </button>
+          <button class="nav-tab-btn" data-view="vessels">
+            <i class="fa-solid fa-ship"></i> FLEET <span class="tab-pill" id="vessels-count-pill">0</span>
+          </button>
+          <button class="nav-tab-btn" data-view="method">
+            <i class="fa-solid fa-square-root-variable"></i> METHOD
+          </button>
+          <button class="nav-tab-btn" data-view="data">
+            <i class="fa-solid fa-database"></i> DATA
+          </button>
+        </nav>
+      </div>
+
+      <div class="dock-scroll-body">
+
+        <!-- PANE 1: INVESTIGATE / FORENSICS VIEW -->
+        <div id="pane-investigate" class="tab-pane active">
+          
+          <!-- Threat Attribution Confidence Gauge -->
+          <div class="pane-section" id="section-threat-gauge">
+            <div class="pane-hdr">THREAT ATTRIBUTION <span class="hdr-detector-badge" id="threat-rank-badge">RANK #1 INTERCEPT</span></div>
+            <div class="threat-gauge-card">
+              <div class="threat-gauge-dial-wrap">
+                <svg class="threat-gauge-svg" viewBox="0 0 100 100">
+                  <circle class="gauge-bg-circle" cx="50" cy="50" r="42" />
+                  <circle class="gauge-fill-circle" id="gauge-fill-circle" cx="50" cy="50" r="42" stroke-dasharray="263.89" stroke-dashoffset="263.89" />
+                </svg>
+                <div class="gauge-center-text">
+                  <span class="gauge-pct" id="gauge-threat-pct">--%</span>
+                  <span class="gauge-label">CONFIDENCE</span>
+                </div>
+              </div>
+              <div class="threat-breakdown-matrix">
+                <div class="threat-target-name" id="threat-target-name">TARGET: <span>--</span></div>
+                <div class="threat-breakdown-row">
+                  <span>Spatiotemporal Intercept</span>
+                  <div class="threat-bar-wrap"><div class="threat-bar-fill" id="bar-spatio" style="width: 0%"></div></div>
+                  <strong id="val-spatio">--</strong>
+                </div>
+                <div class="threat-breakdown-row">
+                  <span>Metocean Drift Match</span>
+                  <div class="threat-bar-wrap"><div class="threat-bar-fill" id="bar-drift" style="width: 0%"></div></div>
+                  <strong id="val-drift">--</strong>
+                </div>
+                <div class="threat-breakdown-row">
+                  <span>Vessel Type &amp; Cargo DWT</span>
+                  <div class="threat-bar-wrap"><div class="threat-bar-fill" id="bar-type" style="width: 0%"></div></div>
+                  <strong id="val-type">--</strong>
+                </div>
+                <div class="threat-breakdown-row">
+                  <span>Track Continuity / Gap</span>
+                  <div class="threat-bar-wrap"><div class="threat-bar-fill" id="bar-traj" style="width: 0%"></div></div>
+                  <strong id="val-traj">--</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pane-section">
+            <div class="pane-hdr">SLICK OVERVIEW</div>
+            <div class="slick-banner-box" id="slick-banner-box">
+              <div class="slick-headline" id="slick-headline">No analysis run yet</div>
+              <div class="slick-submetrics" id="slick-submetrics">Select a scene from the left dock or click "Execute Surveillance"</div>
+            </div>
+          </div>
+
+          <div class="pane-section">
+            <div class="pane-hdr">DETECTION <span class="hdr-detector-badge" id="det-badge-type">U-NET</span></div>
+            <div class="kv-table" id="det-metrics-table">
+              <div class="kv-row"><span>Oil polygons</span><strong id="m-polys-count">--</strong></div>
+              <div class="kv-row"><span>Look-alikes</span><strong id="m-lookalikes-count">--</strong></div>
+              <div class="kv-row"><span>Total oil area</span><strong id="m-total-area">--</strong></div>
+              <div class="kv-row"><span>Largest area</span><strong id="m-largest-area">--</strong></div>
+              <div class="kv-row"><span>Length</span><strong id="m-length">--</strong></div>
+              <div class="kv-row"><span>Width</span><strong id="m-width">--</strong></div>
+              <div class="kv-row"><span>Perimeter</span><strong id="m-perimeter">--</strong></div>
+              <div class="kv-row"><span>Orientation</span><strong id="m-orientation">--</strong></div>
+              <div class="kv-row"><span>Compactness</span><strong id="m-compactness">--</strong></div>
+              <div class="kv-row"><span>Contrast</span><strong id="m-contrast">--</strong></div>
+              <div class="kv-row"><span>Confidence</span><strong id="m-confidence">--</strong></div>
+              <div class="kv-row"><span>Centroid</span><strong id="m-centroid">--</strong></div>
+            </div>
+            
+            <div class="checkpoint-box">
+              <div class="checkpoint-title">Checkpoint metrics, measured on the Zenodo validation tiles:</div>
+              <div class="checkpoint-metrics">
+                <div class="cp-row"><span>IoU oil</span><strong>0.5891</strong></div>
+                <div class="cp-row"><span>IoU look-alike</span><strong>n/a</strong></div>
+                <div class="cp-row"><span>pixel accuracy</span><strong>0.9844</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pane-section">
+            <div class="pane-hdr">POTENTIAL SOURCES <span class="hdr-detector-badge" id="pane-sources-badge">-- RANKED</span></div>
+            <div class="evidence-stats" id="pane-evidence-stats">
+              <div class="kv-row"><span>Oil polygons</span><strong id="ev-polys">--</strong></div>
+              <div class="kv-row"><span>Look-alikes excluded</span><strong id="ev-lookalikes">--</strong></div>
+              <div class="kv-row"><span>Optical chips compared</span><strong id="ev-optical">--</strong></div>
+              <div class="kv-row"><span>Vessels in the box</span><strong id="ev-vessels-box">--</strong></div>
+              <div class="kv-row"><span>Passed the filter</span><strong id="ev-vessels-passed">--</strong></div>
+              <div class="kv-row"><span>Ensemble members</span><strong id="ev-ensemble">100</strong></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PANE 2: DRIFT VIEW -->
+        <div id="pane-drift" class="tab-pane">
+          <div class="pane-section">
+            <div class="pane-hdr">DRIFT RECONSTRUCTION</div>
+            <div class="milestones-timeline" id="drift-milestones">
+              <div class="milestone-item">
+                <div class="milestone-dot dot-cyan"></div>
+                <div class="milestone-info">
+                  <span class="ms-lbl">Backtrack start</span>
+                  <strong class="ms-val" id="dr-t-backtrack">--</strong>
+                </div>
+              </div>
+              <div class="milestone-item">
+                <div class="milestone-dot dot-amber"></div>
+                <div class="milestone-info">
+                  <span class="ms-lbl">Estimated release zone</span>
+                  <strong class="ms-val" id="dr-t-origin">--</strong>
+                </div>
+              </div>
+              <div class="milestone-item">
+                <div class="milestone-dot dot-red"></div>
+                <div class="milestone-info">
+                  <span class="ms-lbl">Observed by radar</span>
+                  <strong class="ms-val" id="dr-t-radar">--</strong>
+                </div>
+              </div>
+              <div class="milestone-item">
+                <div class="milestone-dot dot-cyan"></div>
+                <div class="milestone-info">
+                  <span class="ms-lbl">Forecast horizon</span>
+                  <strong class="ms-val" id="dr-t-forecast">--</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pane-section">
+            <div class="pane-hdr">HINDCAST UNCERTAINTY</div>
+            <div class="chart-canvas-wrapper" style="padding: 6px 0;">
+              <canvas id="canvas-uncertainty" width="280" height="95"></canvas>
+            </div>
+          </div>
+
+          <div class="pane-section">
+            <div class="pane-hdr">PHYSICAL DRIFT METRICS</div>
+            <div class="kv-table" id="drift-physics-table">
+              <div class="kv-row"><span>Origin time</span><strong id="dr-origin-time">--</strong></div>
+              <div class="kv-row"><span>Origin position</span><strong id="dr-origin-pos">--</strong></div>
+              <div class="kv-row"><span>Zone radius</span><strong id="dr-zone-radius">--</strong></div>
+              <div class="kv-row"><span>Zone area</span><strong id="dr-zone-area">--</strong></div>
+              <div class="kv-row"><span>Hours back</span><strong id="dr-hours-back">--</strong></div>
+              <div class="kv-row"><span>Age proxy</span><strong id="dr-age-proxy">--</strong></div>
+              <div class="kv-row"><span>Wind factor</span><strong id="dr-wind-factor">0.030 of 10 m wind</strong></div>
+              <div class="kv-row"><span>Deflection</span><strong id="dr-deflection">0 deg (Ekman leeway)</strong></div>
+              <div class="kv-row"><span>Particles</span><strong id="dr-particles">100</strong></div>
+              <div class="kv-row"><span>Forecast spread</span><strong id="dr-fwd-spread">--</strong></div>
+              <div class="kv-row"><span>Coast impact</span><strong id="dr-coast-impact">stays offshore</strong></div>
+            </div>
+            <div class="pane-note-box">
+              Age is the drift time from the estimated origin to the acquisition. It is a physical proxy, not a laboratory weathering age.
+            </div>
+          </div>
+        </div>
+
+        <!-- PANE 3: VESSELS LEADERBOARD VIEW -->
+        <div id="pane-vessels" class="tab-pane">
+          <div class="vessels-meta-banner" id="vessels-meta-banner">
+            AIS: candidate vessels filtered through spatio-temporal origin zone (MarineCadastre format)
+          </div>
+          <div class="pane-section">
+            <div class="pane-hdr">RANKED VESSELS <span class="hdr-detector-badge" id="vessels-ranked-badge">0 RANKED</span></div>
+            <div class="suspects-list" id="suspects-list">
+              <div class="loading-placeholder">Run analysis to generate ranked suspect leaderboard</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANE 4: METHOD VIEW -->
+        <div id="pane-method" class="tab-pane">
+          <div class="pane-section">
+            <div class="pane-hdr">SCORING MODEL</div>
+            <div class="weights-table">
+              <div class="w-row"><span>prox</span><strong id="w-prox">0.30</strong></div>
+              <div class="w-row"><span>time</span><strong id="w-time">0.20</strong></div>
+              <div class="w-row"><span>beh</span><strong id="w-beh">0.25</strong></div>
+              <div class="w-row"><span>type</span><strong id="w-type">0.15</strong></div>
+              <div class="w-row"><span>traj</span><strong id="w-traj">0.10</strong></div>
+            </div>
+            
+            <div class="formula-code-box">
+              <code>raw = 0.30*prox + 0.20*time + 0.25*beh + 0.15*type + 0.10*traj</code><br/>
+              <code>score = 100 * (raw / sum(weights)) * track_confidence</code>
+            </div>
+
+            <div class="method-rules-list">
+              <div class="rule-item">
+                <strong>proximity:</strong> <code>exp(-0.35 * d / R)</code>, d from closest approach to estimated origin point, R the origin zone radius (floor 2.0 km). Centre 1.00, zone edge 0.37.
+              </div>
+              <div class="rule-item">
+                <strong>time:</strong> <code>exp(-|dt| / 1.5 h)</code>, dt between closest approach and estimated origin time.
+              </div>
+              <div class="rule-item">
+                <strong>trajectory:</strong> 1.0 if course at closest approach is within 45 deg of origin-to-slick bearing, else 0.4.
+              </div>
+              <div class="rule-item">
+                <strong>AIS gap:</strong> 0.55 if a gap &ge; 30 min has a dead-reckoned segment within 5 km of the origin zone.
+              </div>
+              <div class="rule-item">
+                <strong>sparse gap:</strong> 0.33 instead, when the vessel has fewer than 6 genuine receptions.
+              </div>
+              <div class="rule-item">
+                <strong>confidence multiplier:</strong> in [0.10, 1.00] applied to final score. A vessel seen twice cannot outrank one seen six hundred times.
+              </div>
+            </div>
+            <div class="legal-disclaimer">
+              Ranked likelihood for investigation. Not legal proof of discharge.
+            </div>
+          </div>
+        </div>
+
+        <!-- PANE 5: DATA VIEW -->
+        <div id="pane-data" class="tab-pane">
+          <div class="pane-section">
+            <div class="pane-hdr">DATA SOURCES &amp; ARCHITECTURE</div>
+            <div class="data-sources-grid">
+              <div class="data-card">
+                <div class="data-card-title"><i class="fa-solid fa-satellite"></i> Satellite SAR</div>
+                <div class="data-card-body">Sentinel-1 C-band Synthetic Aperture Radar (IW GRD), calibrated to Sigma0 (dB) ground backscatter.</div>
+              </div>
+              <div class="data-card">
+                <div class="data-card-title"><i class="fa-solid fa-camera"></i> Optical EO</div>
+                <div class="data-card-body">Sentinel-2 MSI Level-2A surface reflectance for optical cross-corroboration and cloud filtering.</div>
+              </div>
+              <div class="data-card">
+                <div class="data-card-title"><i class="fa-solid fa-water"></i> Hydrodynamics</div>
+                <div class="data-card-body">Copernicus Marine (CMEMS) surface current vectors + Open-Meteo ERA5 10m synoptic wind fields.</div>
+              </div>
+              <div class="data-card">
+                <div class="data-card-title"><i class="fa-solid fa-tower-broadcast"></i> AIS Maritime Store</div>
+                <div class="data-card-body">MarineCadastre SQLite position store with spatio-temporal indexing, dead-reckoning, and ITU-R M.1371 decoding.</div>
+              </div>
+            </div>
+          </div>
+          <div class="pane-section">
+            <div class="pane-hdr">DIRECT DOWNLOADS</div>
+            <div class="download-links-list">
+              <a href="#" id="link-job-json" class="dlink" target="_blank"><i class="fa-solid fa-file-code"></i> Current Job Audit JSON</a>
+              <a href="#" id="link-geojson" class="dlink" target="_blank"><i class="fa-solid fa-layer-group"></i> Slick &amp; Drift Feature GeoJSON</a>
+              <a href="#" id="link-report-pdf" class="dlink" target="_blank"><i class="fa-solid fa-file-pdf"></i> Forensic Attribution Note (PDF)</a>
+              <a href="#" id="link-report-html" class="dlink" target="_blank"><i class="fa-solid fa-file-lines"></i> Interactive Intelligence Memo (HTML)</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Footer: Export Note & Data -->
+      <div class="dock-footer-export">
+        <button id="btn-export-report-pdf" class="btn-export-primary"><i class="fa-solid fa-file-pdf"></i> Attribution note</button>
+        <button id="btn-export-geojson" class="btn-export-outline"><i class="fa-solid fa-map-location-dot"></i> GeoJSON</button>
+        <button id="btn-export-job-json" class="btn-export-outline"><i class="fa-solid fa-code"></i> Job JSON</button>
+      </div>
+    </aside>
+
+    <!-- =====================================================================
+         FLOATING DOCK 3: FULL-WIDTH C4ISR TACTICAL FLIGHT DECK (Unified Command Bar)
+         ===================================================================== -->
+    <div class="tactical-flight-deck" id="flight-deck">
+      
+      <!-- ZONE 1: LEFT WING (Sensor Telemetry & Precision Geolocation) -->
+      <div class="flight-deck-left-wing">
+        <div class="cmd-wing-item coords-item" id="mouse-coords-box" title="Cursor Crosshair Geolocation">
+          <i class="fa-solid fa-crosshairs text-mint"></i>
+          <span id="coords-val">Lat --.---- &bull; Lon --.----</span>
+        </div>
+        <div class="cmd-wing-item sensor-chip" title="Synthetic Aperture Radar Sensor Package">
+          <i class="fa-solid fa-satellite-dish text-mint"></i>
+          <span>S1A C-SAR &bull; 10m RTC</span>
+        </div>
+        <div class="cmd-wing-item depth-chip" id="cmd-bathymetry-badge" title="Bathymetric Ocean Depth at Slick Centroid">
+          <i class="fa-solid fa-water" style="color: #6ED6B1;"></i>
+          <span id="val-bathymetry">DEPTH: -74m</span>
+        </div>
+      </div>
+
+      <!-- ZONE 2: CENTER HUB (Lagrangian Timeline Engine & Scrubber) -->
+      <div class="flight-deck-center-hub">
+        <div class="playback-controls-group">
+          <button id="btn-step-prev" class="btn-timeline-step" title="Step -1 Hour"><i class="fa-solid fa-backward-step"></i></button>
+          <button id="btn-play-pause" class="btn-playback-toggle" title="Play/Pause Drift Animation">
+            <i class="fa-solid fa-play"></i> PLAY
+          </button>
+          <button id="btn-step-next" class="btn-timeline-step" title="Step +1 Hour"><i class="fa-solid fa-forward-step"></i></button>
+          <button id="btn-playback-speed" class="btn-speed-toggle" title="Cycle playback simulation speed">1x</button>
+        </div>
+
+        <div class="timeline-radar-badge" id="radar-pass-badge">
+          <span id="playback-utc-time" style="color: var(--accent-amber); font-weight: 700;">2026-03-15 01:30 UTC</span>
+        </div>
+
+        <div class="timeline-slider-track">
+          <input type="range" id="timeline-range" min="0" max="36" step="1" value="12" class="scrubber-slider" />
+          <div class="timeline-scale-marks">
+            <span class="scale-mark left">&larr; Hindcast (-12h)</span>
+            <span class="scale-mark center" id="scrubber-step-indicator">T-0h (SAR Detection)</span>
+            <span class="scale-mark right">Forecast (+24h) &rarr;</span>
+          </div>
+        </div>
+
+        <span class="time-readout-pill" id="playback-time-pill">T-0h (SAR Pass)</span>
+      </div>
+
+      <!-- ZONE 3: RIGHT WING (Metocean Physics, Latency Monitor, Quick Actions) -->
+      <div class="flight-deck-right-wing">
+        <div class="flight-env-strip">
+          <div class="flight-env-item" title="Mean 10m Wind Speed">
+            <i class="fa-solid fa-wind" style="color: #f59e0b;"></i>
+            <span id="env-wind-val">-- <small>m/s</small></span>
+          </div>
+          <div class="flight-env-item" title="Mean Surface Current">
+            <i class="fa-solid fa-water" style="color: var(--mint-green);"></i>
+            <span id="env-curr-val">-- <small>m/s</small></span>
+          </div>
+        </div>
+
+        <div class="cmd-wing-item sst-chip" id="env-sst-badge" title="Sea Surface Temperature (SST)">
+          <i class="fa-solid fa-temperature-half" style="color: #38bdf8;"></i>
+          <span id="val-sst">28.4°C SST</span>
+        </div>
+
+        <div class="cmd-wing-item latency-chip" title="Total Pipeline Latency">
+          <span class="live-dot-mini"></span>
+          <span id="deck-latency-readout">132.5 ms</span>
+        </div>
+
+        <div class="cmd-wing-item threat-chip" id="deck-threat-status" title="Highest Threat Culprit Intercept">
+          <i class="fa-solid fa-shield-halved text-mint"></i>
+          <span id="deck-threat-text">RANK #1 INTERCEPT</span>
+        </div>
+
+        <div class="cmd-actions-group">
+          <button class="cmd-action-btn" id="btn-quick-recenter" title="Re-center view onto slick & suspect fleet">
+            <i class="fa-solid fa-arrows-to-dot"></i> RE-CENTER
+          </button>
+          <button class="cmd-action-btn run-btn" id="btn-quick-run" title="Re-execute surveillance pipeline">
+            <i class="fa-solid fa-bolt"></i> RE-ANALYZE
+          </button>
+        </div>
+      </div>
+
+      <!-- Hidden elements preserved for script compatibility -->
+      <div style="display: none;">
+        <span id="lat-detect"></span>
+        <span id="lat-char"></span>
+        <span id="lat-eo"></span>
+        <span id="lat-render"></span>
+        <span id="lat-metocean"></span>
+        <span id="lat-hindcast"></span>
+        <span id="lat-forecast"></span>
+        <span id="telem-total-latency"></span>
+        <span id="env-res-val"></span>
+        <span id="env-time-val"></span>
+        <span id="env-source-caption"></span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Leaflet GIS JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Main Application Logic & GIS Controller -->
+  <script src="app.js"></script>
+</body>
+</html>

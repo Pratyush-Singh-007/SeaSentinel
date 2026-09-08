@@ -1,0 +1,15 @@
+{
+  "scene_id": "s1_mumbai_high_01",
+  "bbox": [
+    72.1338,
+    19.3688,
+    72.2362,
+    19.4712
+  ],
+  "source": "INCOIS_OOM_CMEMS_HYCOM",
+  "u_current": 0.22,
+  "v_current": 0.14,
+  "u_wind": 4.8,
+  "v_wind": 3.2,
+  "description": "Arabian Sea pre-monsoon surface circulation and coastal breeze"
+}

@@ -1,0 +1,70 @@
+[
+  {
+    "scene_id": "s1_mumbai_high_01",
+    "title": "Mumbai High Offshore Basin (Arabian Sea)",
+    "sar_file": "s1_mumbai_high_01.tif",
+    "t_sat": "2026-03-15T01:30:00Z",
+    "bbox": [
+      72.1338,
+      19.3688,
+      72.2362,
+      19.4712
+    ],
+    "center": [
+      72.185,
+      19.42
+    ],
+    "description": "Sentinel-1 SAR IW mode acquisition over offshore crude oil production and tanker shipping fairway."
+  },
+  {
+    "scene_id": "s1_gulf_mexico_02",
+    "title": "Gulf of Mexico Mississippi Canyon",
+    "sar_file": "s1_gulf_mexico_02.tif",
+    "t_sat": "2026-05-10T11:45:00Z",
+    "bbox": [
+      -89.4012,
+      28.3988,
+      -89.2988,
+      28.5012
+    ],
+    "center": [
+      -89.35,
+      28.45
+    ],
+    "description": "Sentinel-1 SAR VV polarization chip capturing heavy vessel transit and verified surface crude slick."
+  },
+  {
+    "scene_id": "s1_malacca_strait_03",
+    "title": "Strait of Malacca Transit Fairway",
+    "sar_file": "s1_malacca_strait_03.tif",
+    "t_sat": "2026-07-22T23:15:00Z",
+    "bbox": [
+      101.3488,
+      2.3988,
+      101.4512,
+      2.5012
+    ],
+    "center": [
+      101.4,
+      2.45
+    ],
+    "description": "High-density international tanker corridor with complex coastal currents and operational discharge."
+  },
+  {
+    "scene_id": "s1_arabian_clean_04",
+    "title": "Arabian Sea Deepwater Fairway",
+    "sar_file": "s1_arabian_clean_04.tif",
+    "t_sat": "2026-03-16T04:15:00Z",
+    "bbox": [
+      71.5488,
+      19.5988,
+      71.6512,
+      19.7012
+    ],
+    "center": [
+      71.6,
+      19.65
+    ],
+    "description": "Sentinel-1 SAR acquisition capturing heavy crude discharge in the Arabian Sea international shipping lane."
+  }
+]

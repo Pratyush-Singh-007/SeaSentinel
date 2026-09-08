@@ -1,0 +1,15 @@
+{
+  "scene_id": "s1_malacca_strait_03",
+  "bbox": [
+    101.3488,
+    2.3988,
+    101.4512,
+    2.5012
+  ],
+  "source": "CMEMS_GLORYS12_ERA5",
+  "u_current": -0.22,
+  "v_current": 0.18,
+  "u_wind": -2.5,
+  "v_wind": 3.8,
+  "description": "Equatorial Malacca tidal strait surface jet"
+}

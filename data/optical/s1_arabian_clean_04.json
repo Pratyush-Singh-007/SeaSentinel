@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "scene_id": "s1_arabian_clean_04",
+  "collection": "COPERNICUS/S2_SR_HARMONIZED",
+  "item_id": "S2B_MSIL2A_s1_arabian_clean_04",
+  "acquired": "2026-03-15T06:15:00+00:00",
+  "offset_hours": -22.0,
+  "offset_label": "22.0h before radar",
+  "cloud_percent": 4.2,
+  "bounds": [
+    [
+      19.5988,
+      71.5488
+    ],
+    [
+      19.7012,
+      71.6512
+    ]
+  ]
+}

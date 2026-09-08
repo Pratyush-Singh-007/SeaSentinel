@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "scene_id": "s1_malacca_strait_03",
+  "collection": "COPERNICUS/S2_SR_HARMONIZED",
+  "item_id": "S2B_MSIL2A_s1_malacca_strait_03",
+  "acquired": "2026-07-22T01:15:00+00:00",
+  "offset_hours": -22.0,
+  "offset_label": "22.0h before radar",
+  "cloud_percent": 4.2,
+  "bounds": [
+    [
+      2.3988000000000005,
+      101.34880000000001
+    ],
+    [
+      2.5012000000000003,
+      101.45120000000001
+    ]
+  ]
+}

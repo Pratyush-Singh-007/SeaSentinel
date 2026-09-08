@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "scene_id": "s1_gulf_mexico_02",
+  "collection": "COPERNICUS/S2_SR_HARMONIZED",
+  "item_id": "S2B_MSIL2A_s1_gulf_mexico_02",
+  "acquired": "2026-05-09T13:45:00+00:00",
+  "offset_hours": -22.0,
+  "offset_label": "22.0h before radar",
+  "cloud_percent": 4.2,
+  "bounds": [
+    [
+      28.3988,
+      -89.40119999999999
+    ],
+    [
+      28.5012,
+      -89.29879999999999
+    ]
+  ]
+}

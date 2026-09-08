@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "scene_id": "s1_mumbai_high_01",
+  "collection": "COPERNICUS/S2_SR_HARMONIZED",
+  "item_id": "S2B_MSIL2A_s1_mumbai_high_01",
+  "acquired": "2026-03-14T03:30:00+00:00",
+  "offset_hours": -22.0,
+  "offset_label": "22.0h before radar",
+  "cloud_percent": 4.2,
+  "bounds": [
+    [
+      19.368800000000004,
+      72.13380000000001
+    ],
+    [
+      19.471200000000003,
+      72.23620000000001
+    ]
+  ]
+}
