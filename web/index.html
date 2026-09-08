@@ -11,6 +11,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <!-- Custom Tactical Console Stylesheet -->
   <link rel="stylesheet" href="style.css" />
+  <script>
+    (function() {
+      var saved = localStorage.getItem('seasentinel_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
 </head>
 <body class="theme-dark tactical-c4isr">
 
@@ -47,8 +53,15 @@
       </div>
     </div>
 
-    <!-- Right Controls: Search, UTC Clock & System Status -->
+    <!-- Right Controls: Theme Toggle, Search, UTC Clock & System Status -->
     <div class="hdr-right">
+      <button id="btn-theme-toggle" class="btn-theme-toggle" title="Switch Theme (Light / Dark Mode)" aria-label="Toggle Theme">
+        <span class="theme-icon-wrap">
+          <i class="fa-solid fa-moon icon-theme-dark"></i>
+          <i class="fa-solid fa-sun icon-theme-light"></i>
+        </span>
+        <span id="theme-mode-text">DARK</span>
+      </button>
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
         <input type="text" id="vessel-search-input" placeholder="Search MMSI or vessel name..." />
@@ -205,10 +218,11 @@
           <div class="layers-title"><i class="fa-solid fa-earth-americas"></i> BASEMAP (NO API KEY)</div>
           <div class="basemap-select-group">
             <select id="basemap-select" class="dropdown-tactical">
-              <option value="ocean" selected>🌊 Ocean Bathymetry (Voyager)</option>
-              <option value="dark">🌌 Stealth Dark Maritime</option>
-              <option value="satellite">🛰️ High-Res Satellite (Esri)</option>
+              <option value="ocean" selected>🌊 Ocean Bathymetry &amp; Nautical (GEBCO/Esri)</option>
+              <option value="dark">🌌 Stealth Dark Maritime (Tactical)</option>
+              <option value="satellite">🛰️ High-Res Satellite (Esri Imagery)</option>
               <option value="osm">🗺️ Standard Nautical OSM</option>
+              <option value="topo">⛰️ Marine Topography &amp; Relief</option>
             </select>
           </div>
 

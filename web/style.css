@@ -227,6 +227,58 @@ html, body {
   gap: 14px;
 }
 
+/* Theme Switcher Toggle Button */
+.btn-theme-toggle {
+  background: rgba(30, 13, 48, 0.85);
+  border: 1px solid var(--border-medium);
+  color: var(--warm-white);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  padding: 4px 10px;
+  border-radius: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  user-select: none;
+}
+
+.btn-theme-toggle:hover {
+  border-color: var(--mint-green);
+  color: var(--mint-green);
+  box-shadow: 0 0 12px rgba(110, 214, 177, 0.35);
+  transform: translateY(-1px);
+}
+
+.theme-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.btn-theme-toggle .icon-theme-dark {
+  display: inline-block;
+  color: #a78bfa;
+}
+
+.btn-theme-toggle .icon-theme-light {
+  display: none;
+  color: #f59e0b;
+}
+
+[data-theme="light"] .btn-theme-toggle .icon-theme-dark {
+  display: none;
+}
+
+[data-theme="light"] .btn-theme-toggle .icon-theme-light {
+  display: inline-block;
+}
+
 .search-box {
   position: relative;
   display: flex;
@@ -2950,3 +3002,632 @@ html, body {
     margin-left: auto;
   }
 }
+
+/* ==========================================================================
+   DARK MODE REFINEMENTS (Pure Tactical Black & Obsidian)
+   ========================================================================== */
+
+[data-theme="dark"], :root {
+  --bg-app: #06070a;
+}
+
+[data-theme="dark"] body {
+  background-color: #06070a;
+}
+
+[data-theme="dark"] .tactical-stage {
+  background-color: #06070a;
+}
+
+[data-theme="dark"] .tactical-map-viewport {
+  background-color: #050608;
+}
+
+/* ==========================================================================
+   LIGHT MODE DESIGN SYSTEM (Crisp Clean White Background & High-Contrast Dark Slate)
+   ========================================================================== */
+
+[data-theme="light"] {
+  --bg-app: #f4f6f9;
+  --bg-topbar: #ffffff;
+  --bg-rail: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-card-active: #e2e8f0;
+  --bg-glass-panel: rgba(255, 255, 255, 0.96);
+
+  --border-subtle: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-active: #0284c7;
+  --border-accent: #0f766e;
+
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --text-dim: #64748b;
+  --text-bright: #000000;
+  --warm-white: #0f172a;
+  --warm-gray: #334155;
+  --warm-gray-muted: #64748b;
+  --warm-gray-dim: #94a3b8;
+
+  --deep-purple: #4f46e5;
+  --deep-purple-dark: #3730a3;
+  --deep-purple-glow: rgba(79, 70, 229, 0.2);
+  --mint-green: #059669;
+  --mint-green-glow: rgba(5, 150, 105, 0.25);
+  --mint-green-subtle: rgba(5, 150, 105, 0.1);
+}
+
+[data-theme="light"] body {
+  background-color: #f4f6f9;
+  color: #0f172a;
+}
+
+/* Light Mode: Tactical Stage & Map */
+[data-theme="light"] .tactical-stage {
+  background-color: #f1f5f9;
+}
+
+[data-theme="light"] .tactical-map-viewport {
+  background-color: #e2e8f0;
+}
+
+/* Light Mode: Header Command Ribbon */
+[data-theme="light"] .tactical-header {
+  background: #ffffff;
+  border-bottom: 1px solid #cbd5e1;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .brand-title {
+  color: #0f172a;
+  text-shadow: none;
+}
+
+[data-theme="light"] .brand-sub {
+  color: #64748b;
+}
+
+[data-theme="light"] .brand-radar-ring {
+  background: rgba(5, 150, 105, 0.1);
+  border-color: #059669;
+}
+
+[data-theme="light"] .sih-badge {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+  box-shadow: none;
+}
+
+[data-theme="light"] .btn-theme-toggle {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .btn-theme-toggle:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  color: #000000;
+}
+
+[data-theme="light"] .btn-tactical-probe {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .btn-tactical-probe:hover,
+[data-theme="light"] .btn-tactical-probe.active {
+  background: #ecfdf5;
+  border-color: #059669;
+  color: #047857;
+}
+
+[data-theme="light"] .active-mission-pill {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .active-mission-pill .divider {
+  color: #cbd5e1;
+}
+
+[data-theme="light"] .active-mission-pill .time-text {
+  color: #047857;
+}
+
+[data-theme="light"] .search-box input {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .search-box input:focus {
+  background: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.25);
+}
+
+[data-theme="light"] .search-icon {
+  color: #64748b;
+}
+
+[data-theme="light"] .utc-clock {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .utc-clock i {
+  color: #0284c7;
+}
+
+[data-theme="light"] .system-status-indicator {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #047857;
+}
+
+[data-theme="light"] .status-label {
+  color: #047857;
+}
+
+/* Light Mode: Floating Docks (Left Palette & Right Forensic Drawer) */
+[data-theme="light"] .floating-dock-left,
+[data-theme="light"] .floating-dock-right {
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.97) 0%, rgba(248, 250, 252, 0.98) 100%);
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .dock-header {
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .dock-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .dock-collapse-btn {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+[data-theme="light"] .dock-collapse-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+[data-theme="light"] .dock-subnav {
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .dock-subtab-btn {
+  color: #64748b;
+}
+
+[data-theme="light"] .dock-subtab-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+[data-theme="light"] .dock-subtab-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+}
+
+[data-theme="light"] .dock-counter-pill {
+  background: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+[data-theme="light"] .dock-subtab-btn:not(.active) .dock-counter-pill {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+[data-theme="light"] .dock-section-title,
+[data-theme="light"] .layers-title {
+  color: #0369a1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Light Mode: Scene Cards & Parameters */
+[data-theme="light"] .scene-card-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .scene-card-btn:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .scene-card-btn.active {
+  background: #f0fdf4;
+  border: 1px solid #059669;
+  border-left: 4px solid #059669;
+  box-shadow: 0 3px 12px rgba(5, 150, 105, 0.15);
+}
+
+[data-theme="light"] .sc-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .sc-meta {
+  color: #475569;
+}
+
+[data-theme="light"] .sc-tag.recorded {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+[data-theme="light"] .sc-tag.simulated {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}
+
+[data-theme="light"] .sc-tag.clean {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+
+[data-theme="light"] .param-input-group {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .param-input-group:focus-within {
+  border-color: #0284c7;
+  box-shadow: 0 0 6px rgba(2, 132, 199, 0.2);
+}
+
+[data-theme="light"] .param-input-group label {
+  color: #475569;
+}
+
+[data-theme="light"] .param-input-group input {
+  color: #0f172a;
+}
+
+[data-theme="light"] .probe-help-text {
+  color: #64748b;
+}
+
+[data-theme="light"] .stat-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .stat-num {
+  color: #0f766e;
+  text-shadow: none;
+}
+
+[data-theme="light"] .stat-lbl {
+  color: #475569;
+}
+
+[data-theme="light"] .dropdown-tactical {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .layer-item {
+  color: #1e293b;
+}
+
+[data-theme="light"] .source-row {
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+[data-theme="light"] .source-row strong {
+  color: #0f172a;
+}
+
+/* Light Mode: Right Rail Navigation Tabs & Suspect Cards */
+[data-theme="light"] .floating-dock-right .nav-tabs {
+  background: #e2e8f0;
+  border: 1px solid #cbd5e1;
+}
+
+[data-theme="light"] .floating-dock-right .nav-tab-btn {
+  color: #475569;
+}
+
+[data-theme="light"] .floating-dock-right .nav-tab-btn:hover {
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="light"] .floating-dock-right .nav-tab-btn.active {
+  background: #ffffff;
+  color: #0284c7;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .floating-dock-right .tab-pill {
+  background: #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .floating-dock-right .nav-tab-btn.active .tab-pill {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+[data-theme="light"] .vessel-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .vessel-card:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+[data-theme="light"] .vessel-card.active {
+  background: #f0fdf4;
+  border-color: #16a34a;
+  border-left: 4px solid #16a34a;
+}
+
+[data-theme="light"] .v-name {
+  color: #0f172a;
+}
+
+[data-theme="light"] .v-mmsi {
+  color: #475569;
+}
+
+[data-theme="light"] .v-stat-row {
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+[data-theme="light"] .score-bar-bg {
+  background: #e2e8f0;
+}
+
+[data-theme="light"] .dock-footer-export {
+  background: #f1f5f9;
+  border-top: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .btn-dock-export {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .btn-dock-export:hover {
+  background: #f1f5f9;
+  border-color: #0284c7;
+  color: #0284c7;
+}
+
+[data-theme="light"] .audit-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+}
+
+[data-theme="light"] .audit-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .audit-item {
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Light Mode: Bottom C4ISR Flight Deck */
+[data-theme="light"] .tactical-flight-deck {
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.97) 0%, rgba(248, 250, 252, 0.98) 100%);
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="light"] .cmd-wing-item {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .cmd-wing-item.coords-item {
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+[data-theme="light"] .cmd-wing-item.depth-chip {
+  color: #6366f1;
+  border-color: #c7d2fe;
+}
+
+[data-theme="light"] .cmd-wing-item.sst-chip {
+  color: #0284c7;
+  border-color: #bae6fd;
+}
+
+[data-theme="light"] .cmd-wing-item.latency-chip {
+  color: #047857;
+  border-color: #a7f3d0;
+  background: #ecfdf5;
+}
+
+[data-theme="light"] .cmd-wing-item.threat-chip {
+  color: #dc2626;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+[data-theme="light"] .flight-env-item {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .btn-playback-tactical {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .btn-playback-tactical:hover {
+  background: #f1f5f9;
+  border-color: #059669;
+  color: #059669;
+}
+
+[data-theme="light"] .btn-speed-toggle {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .btn-speed-toggle:hover {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+[data-theme="light"] .timeline-track {
+  background: #cbd5e1;
+}
+
+[data-theme="light"] .flight-deck-time-readout {
+  color: #0f172a;
+}
+
+/* Light Mode: Over-the-map HUD & Badges */
+[data-theme="light"] .scene-active-banner {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .scene-tag-active {
+  color: #0f172a;
+}
+
+[data-theme="light"] .scene-coord-indicator {
+  color: #059669;
+}
+
+[data-theme="light"] .banner-sub {
+  color: #475569;
+}
+
+[data-theme="light"] .compass-hud {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .compass-dial {
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .compass-n {
+  color: #0f172a;
+}
+
+[data-theme="light"] .btn-camera-action {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .btn-camera-action:hover {
+  background: #f0fdf4;
+  border-color: #059669;
+  color: #047857;
+}
+
+[data-theme="light"] .leaflet-bar a {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .leaflet-bar a:hover {
+  background-color: #f1f5f9 !important;
+}
+
+[data-theme="light"] .leaflet-control-scale-line {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #334155;
+  color: #0f172a;
+}
+
+/* Light Mode: Forensic Evidence Modal */
+[data-theme="light"] .forensic-modal-body {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2);
+}
+
+[data-theme="light"] .forensic-modal-header {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .modal-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .modal-sub {
+  color: #475569;
+}
+
+[data-theme="light"] .modal-close-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+}
+
+[data-theme="light"] .modal-close-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+[data-theme="light"] .modal-tab-btn {
+  color: #64748b;
+  border-bottom: 2px solid transparent;
+}
+
+[data-theme="light"] .modal-tab-btn.active {
+  color: #0284c7;
+  border-bottom-color: #0284c7;
+}
+
+[data-theme="light"] .json-dump-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+

@@ -55,6 +55,7 @@ const PALETTE = {
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", async () => {
+  initThemeToggle();
   initMap();
   initClock();
   initTabNavigation();
@@ -70,6 +71,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 window.addEventListener("hashchange", handleUrlRouting);
 
+function initThemeToggle() {
+  const btn = document.getElementById("btn-theme-toggle");
+  const saved = localStorage.getItem("seasentinel_theme") || "dark";
+  applyTheme(saved);
+
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      applyTheme(next);
+      localStorage.setItem("seasentinel_theme", next);
+    });
+  }
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  document.body.classList.remove("theme-dark", "theme-light");
+  document.body.classList.add(theme === "light" ? "theme-light" : "theme-dark");
+  const lbl = document.getElementById("theme-mode-text");
+  if (lbl) {
+    lbl.textContent = theme === "light" ? "LIGHT" : "DARK";
+  }
+}
+
 function handleUrlRouting() {
   const raw = window.location.search || window.location.hash.replace(/^#/, "?");
   const params = new URLSearchParams(raw.startsWith("?") ? raw : "?" + raw);
@@ -81,22 +107,53 @@ function handleUrlRouting() {
 let currentBasemap = null;
 
 const BASEMAPS = {
-  satellite: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
-    maxZoom: 18,
-    attribution: "Esri, Maxar, Earthstar Geographics",
-  }),
-  ocean: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}", {
-    maxZoom: 13,
-    attribution: "Esri, GEBCO, NOAA, National Geographic",
-  }),
+  // 1. Ocean Bathymetry & Nautical (GEBCO / Esri with depth curves, no missing tiles at high zoom)
+  ocean: L.layerGroup([
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}", {
+      maxNativeZoom: 10,
+      maxZoom: 19,
+      attribution: "Esri, GEBCO, NOAA, National Geographic",
+    }),
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}", {
+      maxNativeZoom: 10,
+      maxZoom: 19,
+    }),
+  ]),
+
+  // 2. Stealth Dark Maritime (Tactical Esri Dark Gray Canvas + crisp maritime labels, NO API KEY)
+  dark: L.layerGroup([
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+      maxNativeZoom: 16,
+      maxZoom: 19,
+      attribution: "Esri, DeLorme, NAVTEQ, OpenStreetMap",
+    }),
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}", {
+      maxNativeZoom: 16,
+      maxZoom: 19,
+    }),
+  ]),
+
+  // 3. High-Res Satellite Imagery (Esri World Imagery + administrative boundaries)
+  satellite: L.layerGroup([
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 19,
+      attribution: "Esri, Maxar, Earthstar Geographics",
+    }),
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 19,
+    }),
+  ]),
+
+  // 4. Standard Nautical OpenStreetMap
   osm: L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: "© OpenStreetMap contributors",
   }),
-  dark: L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+
+  // 5. Ocean Relief & Topography
+  topo: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", {
     maxZoom: 19,
-    subdomains: "abcd",
-    attribution: "© CARTO, © OpenStreetMap contributors",
+    attribution: "Esri, USGS, NOAA",
   }),
 };
 
@@ -106,7 +163,17 @@ function setBasemap(key) {
   }
   currentBasemap = BASEMAPS[key] || BASEMAPS.ocean;
   currentBasemap.addTo(map);
-  currentBasemap.bringToBack();
+  if (typeof currentBasemap.bringToBack === "function") {
+    currentBasemap.bringToBack();
+  } else if (currentBasemap.eachLayer) {
+    currentBasemap.eachLayer((l) => {
+      if (typeof l.bringToBack === "function") l.bringToBack();
+    });
+  }
+  const sel = document.getElementById("basemap-select");
+  if (sel && sel.value !== key) {
+    sel.value = key;
+  }
 }
 
 function initMap() {
