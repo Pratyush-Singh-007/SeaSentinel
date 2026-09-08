@@ -1,0 +1,429 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1080" width="100%" height="100%" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Shadows & Filters -->
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <filter id="badgeShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+
+    <!-- Arrow Markers -->
+    <marker id="arrowRight" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284c7"/>
+    </marker>
+    <marker id="arrowLoop" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1600" height="1080" fill="#f8fafc"/>
+
+  <!-- ========================================================================
+       TOP HEADER TITLE
+       ======================================================================== -->
+  <g id="Header" text-anchor="middle">
+    <text x="800" y="44" fill="#0f172a" font-size="28" font-weight="900" letter-spacing="-0.5">Oil Spill Detection and Attribution System</text>
+    <text x="800" y="70" fill="#475569" font-size="15" font-weight="500">From Satellite Imagery to Evidence-Based Vessel Attribution (SeaSentinel · SIH26143 · NTRO)</text>
+  </g>
+
+  <!-- ========================================================================
+       TOP 6 WORKFLOW COLUMNS
+       ======================================================================== -->
+
+  <!-- ==================== COLUMN 1: DATA SOURCES ==================== -->
+  <g id="Col1-DataSources">
+    <rect x="25" y="95" width="245" height="585" rx="8" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.8" filter="url(#cardShadow)"/>
+    <text x="40" y="125" fill="#0369a1" font-size="16" font-weight="800">Data Sources</text>
+    <text x="40" y="143" fill="#64748b" font-size="11" font-weight="500">Multi-source, real-world data</text>
+
+    <!-- Card 1.1: Sentinel-1 SAR -->
+    <rect x="37" y="160" width="221" height="98" rx="6" fill="#ffffff" stroke="#e0f2fe" stroke-width="1.2"/>
+    <circle cx="58" cy="182" r="14" fill="#e0f2fe"/>
+    <text x="58" y="187" fill="#0284c7" font-size="14" text-anchor="middle">🛰️</text>
+    <text x="80" y="180" fill="#0f172a" font-size="12.5" font-weight="800">Sentinel-1 SAR</text>
+    <text x="80" y="195" fill="#0284c7" font-size="10.5" font-weight="600">(Real + Benchmark)</text>
+    <text x="47" y="215" fill="#475569" font-size="10.5">• C-Band VV/VH Polarization</text>
+    <text x="47" y="230" fill="#475569" font-size="10.5">• 10 m RTC Ground Resolution</text>
+    <text x="47" y="245" fill="#475569" font-size="10.5">• Georeferenced WGS84 GeoTIFF</text>
+
+    <!-- Card 1.2: NOAA AIS -->
+    <rect x="37" y="270" width="221" height="98" rx="6" fill="#ffffff" stroke="#e0f2fe" stroke-width="1.2"/>
+    <circle cx="58" cy="292" r="14" fill="#e0f2fe"/>
+    <text x="58" y="297" fill="#0284c7" font-size="14" text-anchor="middle">🚢</text>
+    <text x="80" y="290" fill="#0f172a" font-size="12.5" font-weight="800">Maritime AIS Traffic</text>
+    <text x="80" y="305" fill="#0284c7" font-size="10.5" font-weight="600">(Real NOAA + High-Density)</text>
+    <text x="47" y="325" fill="#475569" font-size="10.5">• Live/Historic Vessel Positions</text>
+    <text x="47" y="340" fill="#475569" font-size="10.5">• Timestamped SOG/COG Tracks</text>
+    <text x="47" y="355" fill="#475569" font-size="10.5">• MMSI, IMO, Vessel Class Metadata</text>
+
+    <!-- Card 1.3: Environmental Data -->
+    <rect x="37" y="380" width="221" height="98" rx="6" fill="#ffffff" stroke="#e0f2fe" stroke-width="1.2"/>
+    <circle cx="58" cy="402" r="14" fill="#e0f2fe"/>
+    <text x="58" y="407" fill="#0284c7" font-size="14" text-anchor="middle">🌊</text>
+    <text x="80" y="400" fill="#0f172a" font-size="12.5" font-weight="800">Environmental Data</text>
+    <text x="80" y="415" fill="#0284c7" font-size="10.5" font-weight="600">(ERA5 &amp; CMEMS Real Grids)</text>
+    <text x="47" y="435" fill="#475569" font-size="10.5">• 10 m Wind Speed &amp; Direction</text>
+    <text x="47" y="450" fill="#475569" font-size="10.5">• Hydrodynamic Surface Currents</text>
+    <text x="47" y="465" fill="#475569" font-size="10.5">• Sea Surface Temperature (SST)</text>
+
+    <!-- Card 1.4: Reference Benchmark Data -->
+    <rect x="37" y="490" width="221" height="98" rx="6" fill="#ffffff" stroke="#e0f2fe" stroke-width="1.2"/>
+    <circle cx="58" cy="512" r="14" fill="#e0f2fe"/>
+    <text x="58" y="517" fill="#0284c7" font-size="14" text-anchor="middle">🗄️</text>
+    <text x="80" y="510" fill="#0f172a" font-size="12.5" font-weight="800">Reference Benchmark</text>
+    <text x="80" y="525" fill="#0284c7" font-size="10.5" font-weight="600">(Zenodo Records 5142143/5221908)</text>
+    <text x="47" y="545" fill="#475569" font-size="10.5">• 1,164 Expert Verified Oil Masks</text>
+    <text x="47" y="560" fill="#475569" font-size="10.5">• Natural Look-Alike Tile Library</text>
+    <text x="47" y="575" fill="#475569" font-size="10.5">• Natural Earth 1:10m Coastlines</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="270" y1="387" x2="288" y2="387" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- ==================== COLUMN 2: PREPROCESSING ==================== -->
+  <g id="Col2-Preprocessing">
+    <rect x="290" y="95" width="245" height="585" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.8" filter="url(#cardShadow)"/>
+    <text x="305" y="125" fill="#15803d" font-size="16" font-weight="800">Preprocessing</text>
+    <text x="305" y="143" fill="#64748b" font-size="11" font-weight="500">Clean, align and prepare data</text>
+
+    <!-- Card 2.1: Geospatial Alignment -->
+    <rect x="302" y="160" width="221" height="98" rx="6" fill="#ffffff" stroke="#dcfce7" stroke-width="1.2"/>
+    <circle cx="323" cy="182" r="14" fill="#dcfce7"/>
+    <text x="323" y="187" fill="#16a34a" font-size="14" text-anchor="middle">📍</text>
+    <text x="345" y="182" fill="#0f172a" font-size="12.5" font-weight="800">Geospatial Alignment</text>
+    <text x="345" y="197" fill="#64748b" font-size="10.5">LocalAEQD Metric Projection</text>
+    <text x="312" y="217" fill="#475569" font-size="10.5">• Tangent plane EPSG:9832 at slick</text>
+    <text x="312" y="232" fill="#475569" font-size="10.5">• 512×512 px sliding tile slicing</text>
+    <text x="312" y="247" fill="#475569" font-size="10.5">• 25% overlap (128 px) stitching</text>
+
+    <!-- Card 2.2: Noise Reduction -->
+    <rect x="302" y="270" width="221" height="98" rx="6" fill="#ffffff" stroke="#dcfce7" stroke-width="1.2"/>
+    <circle cx="323" cy="292" r="14" fill="#dcfce7"/>
+    <text x="323" y="297" fill="#16a34a" font-size="14" text-anchor="middle">🔍</text>
+    <text x="345" y="282" fill="#0f172a" font-size="12.5" font-weight="800">Noise Reduction</text>
+    <text x="345" y="297" fill="#64748b" font-size="10.5">Radiometric Calibration &amp; Filter</text>
+    <text x="312" y="317" fill="#475569" font-size="10.5">• Raw DN² to γ⁰ backscatter (dB)</text>
+    <text x="312" y="332" fill="#475569" font-size="10.5">• Spatial Lee/Box speckle filter</text>
+    <text x="312" y="347" fill="#475569" font-size="10.5">• Ocean clutter suppression</text>
+
+    <!-- Card 2.3: Background Estimation -->
+    <rect x="302" y="380" width="221" height="98" rx="6" fill="#ffffff" stroke="#dcfce7" stroke-width="1.2"/>
+    <circle cx="323" cy="402" r="14" fill="#dcfce7"/>
+    <text x="323" y="407" fill="#16a34a" font-size="14" text-anchor="middle">⚙️</text>
+    <text x="345" y="382" fill="#0f172a" font-size="12.5" font-weight="800">Background Estimation</text>
+    <text x="345" y="397" fill="#64748b" font-size="10.5">Adaptive Noise Floor Gate</text>
+    <text x="312" y="417" fill="#475569" font-size="10.5">• Local background mean &amp; std dev</text>
+    <text x="312" y="432" fill="#475569" font-size="10.5">• Clean scene contrast span check</text>
+    <text x="312" y="447" fill="#475569" font-size="10.5">• Δσ⁰ &lt; 2.5 dB zero-alarm cutoff</text>
+
+    <!-- Card 2.4: Feature Extraction -->
+    <rect x="302" y="490" width="221" height="98" rx="6" fill="#ffffff" stroke="#dcfce7" stroke-width="1.2"/>
+    <circle cx="323" cy="512" r="14" fill="#dcfce7"/>
+    <text x="323" y="517" fill="#16a34a" font-size="14" text-anchor="middle">📐</text>
+    <text x="345" y="492" fill="#0f172a" font-size="12.5" font-weight="800">Feature Extraction</text>
+    <text x="345" y="507" fill="#64748b" font-size="10.5">Morphometrics &amp; Polarimetry</text>
+    <text x="312" y="527" fill="#475569" font-size="10.5">• Moore boundary contour trace</text>
+    <text x="312" y="542" fill="#475569" font-size="10.5">• Douglas-Peucker (ε = 12.5 m)</text>
+    <text x="312" y="557" fill="#475569" font-size="10.5">• PCA orientation, length, width, C</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="535" y1="387" x2="553" y2="387" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- ==================== COLUMN 3: DETECTION (LAYER 1) ==================== -->
+  <g id="Col3-Detection">
+    <rect x="555" y="95" width="245" height="585" rx="8" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1.8" filter="url(#cardShadow)"/>
+    <text x="570" y="125" fill="#6d28d9" font-size="16" font-weight="800">Detection (Layer 1)</text>
+    <text x="570" y="143" fill="#64748b" font-size="11" font-weight="500">Find oil spill candidates</text>
+
+    <!-- Sub-Box 3.1: SAR Image Preview Mockup -->
+    <rect x="567" y="160" width="221" height="110" rx="6" fill="#1e1b4b" stroke="#c4b5fd" stroke-width="1.2"/>
+    <text x="677" y="180" fill="#a78bfa" font-size="11" font-weight="bold" text-anchor="middle">SENTINEL-1 SAR TILE (512 px)</text>
+    <!-- Dark Ocean texture mock -->
+    <rect x="580" y="190" width="195" height="68" rx="4" fill="#0f0e26"/>
+    <!-- Simulated dark slick shape -->
+    <path d="M 605 230 Q 640 215 675 220 T 735 205 Q 755 210 740 225 T 670 235 T 605 230 Z" fill="#000000" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="677" y="248" fill="#fca5a5" font-size="9" font-weight="bold" text-anchor="middle">Capillary Wave Damping Footprint</text>
+
+    <!-- Sub-Box 3.2: Segmentation Pipeline -->
+    <rect x="567" y="285" width="221" height="150" rx="6" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+    <circle cx="588" cy="307" r="14" fill="#ede9fe"/>
+    <text x="588" y="312" fill="#7c3aed" font-size="14" text-anchor="middle">🧠</text>
+    <text x="610" y="305" fill="#0f172a" font-size="12.5" font-weight="800">PyTorch U-Net Model</text>
+    <text x="610" y="320" fill="#6d28d9" font-size="10.5" font-weight="600">Deep Semantic Segmentation</text>
+    <text x="577" y="340" fill="#475569" font-size="10.5">• ResNet Encoder-Decoder Backbone</text>
+    <text x="577" y="355" fill="#475569" font-size="10.5">• Multi-scale Skip Connections</text>
+    <text x="577" y="370" fill="#475569" font-size="10.5">• Cosine-Tapered Window Stitching</text>
+    <text x="577" y="385" fill="#475569" font-size="10.5">• Adaptive dB Baseline Fallback</text>
+    <rect x="577" y="398" width="201" height="24" rx="4" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="677" y="414" fill="#6d28d9" font-size="10" font-weight="bold" text-anchor="middle">Oil IoU: 0.8891 | Accuracy: 98.44%</text>
+
+    <!-- Sub-Box 3.3: Oil Spill Candidate Masks -->
+    <rect x="567" y="450" width="221" height="138" rx="6" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+    <circle cx="588" cy="472" r="14" fill="#ede9fe"/>
+    <text x="588" y="477" fill="#7c3aed" font-size="14" text-anchor="middle">🎭</text>
+    <text x="610" y="470" fill="#0f172a" font-size="12.5" font-weight="800">Candidate Mask Output</text>
+    <text x="610" y="485" fill="#64748b" font-size="10.5">Vectorized GeoJSON Contours</text>
+    <text x="577" y="507" fill="#475569" font-size="10.5">• Discrete Connected Components</text>
+    <text x="577" y="522" fill="#475569" font-size="10.5">• Area Thresholding (&gt; 0.05 km²)</text>
+    <text x="577" y="537" fill="#475569" font-size="10.5">• Bounding BBox &amp; Centroid (Lat/Lon)</text>
+    <text x="577" y="552" fill="#475569" font-size="10.5">• Sentinel-2 Optical Footprint Overlay</text>
+    <text x="577" y="567" fill="#475569" font-size="10.5">• Formatted for Layer 2 Verification</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <line x1="800" y1="387" x2="818" y2="387" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- ==================== COLUMN 4: CLASSIFICATION (LAYER 2) ==================== -->
+  <g id="Col4-Classification">
+    <rect x="820" y="95" width="245" height="585" rx="8" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.8" filter="url(#cardShadow)"/>
+    <text x="835" y="125" fill="#0f766e" font-size="16" font-weight="800">Classification (Layer 2)</text>
+    <text x="835" y="143" fill="#64748b" font-size="11" font-weight="500">Real oil vs. look-alike</text>
+
+    <!-- Sub-Box 4.1: SAR Features Evaluated -->
+    <rect x="832" y="160" width="221" height="145" rx="6" fill="#ffffff" stroke="#ccfbf1" stroke-width="1.2"/>
+    <circle cx="853" cy="182" r="14" fill="#ccfbf1"/>
+    <text x="853" y="187" fill="#0d9488" font-size="14" text-anchor="middle">📊</text>
+    <text x="875" y="180" fill="#0f172a" font-size="12.5" font-weight="800">Key Morphic Features</text>
+    <text x="875" y="195" fill="#64748b" font-size="10.5">Physical Oil Characterisation</text>
+    <text x="842" y="215" fill="#475569" font-size="10.5">• Dual-Pol Ratio (VV/VH)</text>
+    <text x="842" y="230" fill="#475569" font-size="10.5">• Isoperimetric Compactness (C)</text>
+    <text x="842" y="245" fill="#475569" font-size="10.5">• PCA Elongation &amp; Major Axis</text>
+    <text x="842" y="260" fill="#475569" font-size="10.5">• Mean Backscatter Contrast (dB)</text>
+    <text x="842" y="275" fill="#475569" font-size="10.5">• Edge Sharpness / Boundary Gradient</text>
+    <text x="842" y="290" fill="#475569" font-size="10.5">• Bonn Agreement Thickness Index</text>
+
+    <!-- Sub-Box 4.2: Discriminator & False Positive Gate -->
+    <rect x="832" y="320" width="221" height="145" rx="6" fill="#ffffff" stroke="#ccfbf1" stroke-width="1.2"/>
+    <circle cx="853" cy="342" r="14" fill="#ccfbf1"/>
+    <text x="853" y="347" fill="#0d9488" font-size="14" text-anchor="middle">🛡️</text>
+    <text x="875" y="340" fill="#0f172a" font-size="12.5" font-weight="800">Discriminator Core</text>
+    <text x="875" y="355" fill="#0f766e" font-size="10.5" font-weight="600">False-Positive Ceiling Gate</text>
+    <text x="842" y="375" fill="#475569" font-size="10.5">• Rejects Algae &amp; Biogenic Film</text>
+    <text x="842" y="390" fill="#475569" font-size="10.5">• Suppresses Low-Wind Shadows</text>
+    <text x="842" y="405" fill="#475569" font-size="10.5">• Eliminates Ship Wake Artifacts</text>
+    <text x="842" y="420" fill="#475569" font-size="10.5">• 40 Epochs Zenodo Benchmark</text>
+    <text x="842" y="435" fill="#475569" font-size="10.5">• Strict Gate: Water FPR ≤ 1.06%</text>
+    <text x="842" y="450" fill="#475569" font-size="10.5">• Cross-Sensor S2 Corroboration</text>
+
+    <!-- Badges 4.3: Binary Classification Outcome -->
+    <g id="ClassificationBadges">
+      <!-- Real Oil Badge -->
+      <rect x="837" y="485" width="102" height="65" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5" filter="url(#badgeShadow)"/>
+      <circle cx="855" cy="505" r="7" fill="#22c55e"/>
+      <text x="870" y="509" fill="#15803d" font-size="12" font-weight="900">Real Oil</text>
+      <text x="888" y="530" fill="#16a34a" font-size="13" font-weight="bold" text-anchor="middle">(0.8 – 1.0)</text>
+      <text x="888" y="543" fill="#64748b" font-size="8.5" text-anchor="middle">Active Slick</text>
+
+      <!-- Look-alike Badge -->
+      <rect x="946" y="485" width="102" height="65" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5" filter="url(#badgeShadow)"/>
+      <circle cx="964" cy="505" r="7" fill="#f59e0b"/>
+      <text x="978" y="509" fill="#b45309" font-size="11" font-weight="900">Look-Alike</text>
+      <text x="997" y="530" fill="#d97706" font-size="13" font-weight="bold" text-anchor="middle">(0.0 – 0.4)</text>
+      <text x="997" y="543" fill="#64748b" font-size="8.5" text-anchor="middle">Non-Actionable</text>
+    </g>
+  </g>
+
+  <!-- Arrow 4 -> 5 -->
+  <line x1="1065" y1="387" x2="1083" y2="387" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- ==================== COLUMN 5: DRIFT & ATTRIBUTION ==================== -->
+  <g id="Col5-DriftAttribution">
+    <rect x="1085" y="95" width="245" height="585" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.8" filter="url(#cardShadow)"/>
+    <text x="1100" y="125" fill="#1d4ed8" font-size="16" font-weight="800">Drift &amp; Attribution</text>
+    <text x="1100" y="143" fill="#64748b" font-size="11" font-weight="500">Model movement and find sources</text>
+
+    <!-- Sub-Box 5.1: Lagrangian Drift Model -->
+    <rect x="1097" y="160" width="221" height="128" rx="6" fill="#ffffff" stroke="#dbeafe" stroke-width="1.2"/>
+    <circle cx="1118" cy="182" r="14" fill="#dbeafe"/>
+    <text x="1118" y="187" fill="#2563eb" font-size="14" text-anchor="middle">🌊</text>
+    <text x="1140" y="180" fill="#0f172a" font-size="12.5" font-weight="800">Lagrangian Drift Model</text>
+    <text x="1140" y="195" fill="#1d4ed8" font-size="10.5" font-weight="600">Runge-Kutta 2nd-Order (RK2)</text>
+    <text x="1107" y="215" fill="#475569" font-size="10.5">• V = U_curr + 0.031·R(θ)·U_wind</text>
+    <text x="1107" y="230" fill="#475569" font-size="10.5">• 50 Monte-Carlo particles (15m step)</text>
+    <text x="1107" y="245" fill="#475569" font-size="10.5">• <tspan fill="#b45309" font-weight="bold">Hindcast (-12h):</tspan> Spill Origin Zone</text>
+    <text x="1107" y="260" fill="#475569" font-size="10.5">• <tspan fill="#0284c7" font-weight="bold">Forecast (+24h):</tspan> 90% Spread Cone</text>
+    <text x="1107" y="275" fill="#475569" font-size="10.5">• Coastal Landfall Collision Check</text>
+
+    <!-- Sub-Box 5.2: Candidate Vessels Funnel -->
+    <rect x="1097" y="300" width="221" height="128" rx="6" fill="#ffffff" stroke="#dbeafe" stroke-width="1.2"/>
+    <circle cx="1118" cy="322" r="14" fill="#dbeafe"/>
+    <text x="1118" y="327" fill="#2563eb" font-size="14" text-anchor="middle">🚢</text>
+    <text x="1140" y="320" fill="#0f172a" font-size="12.5" font-weight="800">Candidate Vessels</text>
+    <text x="1140" y="335" fill="#1d4ed8" font-size="10.5" font-weight="600">Indexed Spatiotemporal Funnel</text>
+    <text x="1107" y="355" fill="#475569" font-size="10.5">• Spatial Bounding Box: ±1.5° Origin</text>
+    <text x="1107" y="370" fill="#475569" font-size="10.5">• Temporal Window: [T-3h, T+3h]</text>
+    <text x="1107" y="385" fill="#475569" font-size="10.5">• 1-Minute Hermite Cubic Resampling</text>
+    <text x="1107" y="400" fill="#475569" font-size="10.5">• Closest Point of Approach (d_min)</text>
+    <text x="1107" y="415" fill="#475569" font-size="10.5">• Dark-Ship Transponder Gap Check</text>
+
+    <!-- Sub-Box 5.3: Explainable Attribution Scoring -->
+    <rect x="1097" y="440" width="221" height="150" rx="6" fill="#ffffff" stroke="#dbeafe" stroke-width="1.2"/>
+    <circle cx="1118" cy="462" r="14" fill="#dbeafe"/>
+    <text x="1118" y="467" fill="#2563eb" font-size="14" text-anchor="middle">⚖️</text>
+    <text x="1140" y="460" fill="#0f172a" font-size="12.5" font-weight="800">Attribution Scoring</text>
+    <text x="1140" y="475" fill="#1d4ed8" font-size="10.5" font-weight="600">5-Pillar Explainable Utility</text>
+    <text x="1107" y="495" fill="#475569" font-size="10.5">• S_prox (30%): Distance to Origin</text>
+    <text x="1107" y="510" fill="#475569" font-size="10.5">• S_time (20%): Time Offset Decay</text>
+    <text x="1107" y="525" fill="#475569" font-size="10.5">• S_traj (10%): Course Alignment</text>
+    <text x="1107" y="540" fill="#475569" font-size="10.5">• S_type (15%): MARPOL Cargo Risk</text>
+    <text x="1107" y="555" fill="#475569" font-size="10.5">• S_beh  (25%): Speed &amp; AIS Gaps</text>
+    <text x="1107" y="570" fill="#2563eb" font-size="10" font-weight="bold">• C_track: Dead-Reckoning Penalty</text>
+  </g>
+
+  <!-- Arrow 5 -> 6 -->
+  <line x1="1330" y1="387" x2="1348" y2="387" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowRight)"/>
+
+  <!-- ==================== COLUMN 6: OUTPUTS & VISUALIZATION ==================== -->
+  <g id="Col6-Outputs">
+    <rect x="1350" y="95" width="225" height="585" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.8" filter="url(#cardShadow)"/>
+    <text x="1365" y="125" fill="#7e22ce" font-size="16" font-weight="800">Outputs &amp; Visualization</text>
+    <text x="1365" y="143" fill="#64748b" font-size="11" font-weight="500">Evidence-based decision support</text>
+
+    <!-- Sub-Box 6.1: Evidence Leaderboard -->
+    <rect x="1360" y="160" width="205" height="98" rx="6" fill="#ffffff" stroke="#f3e8ff" stroke-width="1.2"/>
+    <circle cx="1380" cy="182" r="13" fill="#f3e8ff"/>
+    <text x="1380" y="187" fill="#9333ea" font-size="13" text-anchor="middle">🏆</text>
+    <text x="1400" y="180" fill="#0f172a" font-size="12" font-weight="800">Evidence Graph</text>
+    <text x="1400" y="195" fill="#7e22ce" font-size="10" font-weight="600">Attribution Ranking</text>
+    <text x="1370" y="215" fill="#475569" font-size="10">• Rank #1 Intercept Badge</text>
+    <text x="1370" y="230" fill="#475569" font-size="10">• Confidence Gauge (0–100%)</text>
+    <text x="1370" y="245" fill="#475569" font-size="10">• Solid-to-Hairline DR Bars</text>
+
+    <!-- Sub-Box 6.2: Interactive Map -->
+    <rect x="1360" y="270" width="205" height="98" rx="6" fill="#ffffff" stroke="#f3e8ff" stroke-width="1.2"/>
+    <circle cx="1380" cy="292" r="13" fill="#f3e8ff"/>
+    <text x="1380" y="297" fill="#9333ea" font-size="13" text-anchor="middle">🗺️</text>
+    <text x="1400" y="290" fill="#0f172a" font-size="12" font-weight="800">Tactical GIS Map</text>
+    <text x="1400" y="305" fill="#7e22ce" font-size="10" font-weight="600">Leaflet 1.9 Engine</text>
+    <text x="1370" y="325" fill="#475569" font-size="10">• Dark &amp; Light Dual Basemaps</text>
+    <text x="1370" y="340" fill="#475569" font-size="10">• Nautical Range Rings (NM)</text>
+    <text x="1370" y="355" fill="#475569" font-size="10">• Real-time Intercept Vectors</text>
+
+    <!-- Sub-Box 6.3: Reports & Alerts -->
+    <rect x="1360" y="380" width="205" height="98" rx="6" fill="#ffffff" stroke="#f3e8ff" stroke-width="1.2"/>
+    <circle cx="1380" cy="402" r="13" fill="#f3e8ff"/>
+    <text x="1380" y="407" fill="#9333ea" font-size="13" text-anchor="middle">📄</text>
+    <text x="1400" y="400" fill="#0f172a" font-size="12" font-weight="800">Reports &amp; Alerts</text>
+    <text x="1400" y="415" fill="#7e22ce" font-size="10" font-weight="600">Court-Admissible Dossier</text>
+    <text x="1370" y="435" fill="#475569" font-size="10">• Maritime Attribution Note</text>
+    <text x="1370" y="450" fill="#475569" font-size="10">• GeoJSON GIS Feature Export</text>
+    <text x="1370" y="465" fill="#475569" font-size="10">• Actionable Coastland Alerts</text>
+
+    <!-- Sub-Box 6.4: 4D Time Machine Dashboard -->
+    <rect x="1360" y="490" width="205" height="98" rx="6" fill="#ffffff" stroke="#f3e8ff" stroke-width="1.2"/>
+    <circle cx="1380" cy="512" r="13" fill="#f3e8ff"/>
+    <text x="1380" y="517" fill="#9333ea" font-size="13" text-anchor="middle">⏱️</text>
+    <text x="1400" y="510" fill="#0f172a" font-size="12" font-weight="800">4D Flight Deck</text>
+    <text x="1400" y="525" fill="#7e22ce" font-size="10" font-weight="600">Lagrangian Simulator</text>
+    <text x="1370" y="545" fill="#475569" font-size="10">• Scrubber: T-12h to T+24h</text>
+    <text x="1370" y="560" fill="#475569" font-size="10">• 60 FPS Kinematic Playback</text>
+    <text x="1370" y="575" fill="#475569" font-size="10">• Live Wind &amp; Current Readouts</text>
+  </g>
+
+  <!-- ========================================================================
+       FEEDBACK & CONTINUOUS IMPROVEMENT LOOP BAR
+       ======================================================================== -->
+  <g id="FeedbackLoop">
+    <path d="M 1205 600 L 1205 625 L 412 625 L 412 600" fill="none" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="5,5"/>
+    <rect x="635" y="612" width="330" height="26" rx="13" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" filter="url(#badgeShadow)"/>
+    <text x="800" y="629" fill="#0369a1" font-size="11.5" font-weight="bold" text-anchor="middle">🔄 Feedback &amp; Continuous Tuning: Parameter Calibration &amp; Re-Analysis</text>
+  </g>
+
+  <!-- ========================================================================
+       BOTTOM 5 FOOTER CARDS (TECHNICAL SPECIFICATIONS & VALIDATION)
+       ======================================================================== -->
+
+  <!-- Card 1: Key Technologies -->
+  <g id="Footer-KeyTechnologies">
+    <rect x="25" y="700" width="298" height="240" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#cardShadow)"/>
+    <rect x="25" y="700" width="298" height="6" rx="3" fill="#0284c7"/>
+    <circle cx="50" cy="732" r="13" fill="#e0f2fe"/>
+    <text x="50" y="737" fill="#0284c7" font-size="13" text-anchor="middle">⚙️</text>
+    <text x="72" y="736" fill="#0f172a" font-size="14.5" font-weight="800">Key Technologies</text>
+    
+    <text x="40" y="767" fill="#334155" font-size="11">• <tspan font-weight="bold">PyTorch (U-Net):</tspan> Dual-pol SAR segmentation</text>
+    <text x="40" y="789" fill="#334155" font-size="11">• <tspan font-weight="bold">FastAPI + Uvicorn:</tspan> Microsecond async API</text>
+    <text x="40" y="811" fill="#334155" font-size="11">• <tspan font-weight="bold">Geospatial:</tspan> PyProj (LocalAEQD), Shapely</text>
+    <text x="40" y="833" fill="#334155" font-size="11">• <tspan font-weight="bold">Physics:</tspan> NumPy/SciPy RK2 numerical drift</text>
+    <text x="40" y="855" fill="#334155" font-size="11">• <tspan font-weight="bold">Storage:</tspan> SQLite 3 with compound B-Trees</text>
+    <text x="40" y="877" fill="#334155" font-size="11">• <tspan font-weight="bold">Frontend:</tspan> Vanilla ES6+, CSS3, Leaflet 1.9</text>
+    <text x="40" y="899" fill="#334155" font-size="11">• <tspan font-weight="bold">100% Air-Gapped:</tspan> Zero cloud/CDN dependencies</text>
+    <text x="40" y="921" fill="#334155" font-size="11">• <tspan font-weight="bold">Test Suite:</tspan> Pytest (9/9 unit tests passing)</text>
+  </g>
+
+  <!-- Card 2: Real-World Validation -->
+  <g id="Footer-RealWorldValidation">
+    <rect x="337" y="700" width="298" height="240" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#cardShadow)"/>
+    <rect x="337" y="700" width="298" height="6" rx="3" fill="#16a34a"/>
+    <circle cx="362" cy="732" r="13" fill="#dcfce7"/>
+    <text x="362" y="737" fill="#16a34a" font-size="13" text-anchor="middle">✓</text>
+    <text x="384" y="736" fill="#0f172a" font-size="14.5" font-weight="800">Real-World Validation</text>
+    
+    <text x="352" y="767" fill="#334155" font-size="11">• <tspan font-weight="bold">Real Sentinel-1 C-Band SAR</tspan> satellite passes</text>
+    <text x="352" y="789" fill="#334155" font-size="11">• <tspan font-weight="bold">Real NOAA MarineCadastre</tspan> AIS vessel data</text>
+    <text x="352" y="811" fill="#334155" font-size="11">• <tspan font-weight="bold">Real CMEMS &amp; ERA5</tspan> wind &amp; ocean current grids</text>
+    <text x="352" y="833" fill="#334155" font-size="11">• <tspan font-weight="bold">Gulf of Mexico (MC20)</tspan> verified slick case</text>
+    <text x="352" y="855" fill="#334155" font-size="11">• <tspan font-weight="bold">Mumbai High Offshore</tspan> high-density fairway</text>
+    <text x="352" y="877" fill="#334155" font-size="11">• <tspan font-weight="bold">Strait of Malacca</tspan> congested choke point</text>
+    <text x="352" y="899" fill="#334155" font-size="11">• <tspan font-weight="bold">Arabian Sea Clean Control</tspan> (zero false alarm)</text>
+    <text x="352" y="921" fill="#334155" font-size="11">• <tspan font-weight="bold">Zenodo 1,164-Tile</tspan> benchmark test validation</text>
+  </g>
+
+  <!-- Card 3: Key Results -->
+  <g id="Footer-KeyResults">
+    <rect x="649" y="700" width="298" height="240" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#cardShadow)"/>
+    <rect x="649" y="700" width="298" height="6" rx="3" fill="#8b5cf6"/>
+    <circle cx="674" cy="732" r="13" fill="#ede9fe"/>
+    <text x="674" y="737" fill="#7c3aed" font-size="13" text-anchor="middle">📊</text>
+    <text x="696" y="736" fill="#0f172a" font-size="14.5" font-weight="800">Key Results (Current)</text>
+    
+    <text x="664" y="767" fill="#334155" font-size="11">• <tspan font-weight="bold">End-to-End Latency:</tspan> 138 ms execution</text>
+    <text x="664" y="789" fill="#334155" font-size="11">• <tspan font-weight="bold">Oil Class IoU:</tspan> 0.8891 (PyTorch U-Net)</text>
+    <text x="664" y="811" fill="#334155" font-size="11">• <tspan font-weight="bold">Pixel Accuracy:</tspan> 98.44% across sea states</text>
+    <text x="664" y="833" fill="#334155" font-size="11">• <tspan font-weight="bold">Water False Positive Ceiling:</tspan> ≤ 1.06%</text>
+    <text x="664" y="855" fill="#334155" font-size="11">• <tspan font-weight="bold">RK2 Reversibility Error:</tspan> &lt; 1 mm divergence</text>
+    <text x="664" y="877" fill="#334155" font-size="11">• <tspan font-weight="bold">AIS Query Funnel:</tspan> &lt; 35 ms for 10k+ pings</text>
+    <text x="664" y="899" fill="#334155" font-size="11">• <tspan font-weight="bold">Memory Footprint:</tspan> &lt; 350 MB RAM</text>
+    <text x="664" y="921" fill="#334155" font-size="11">• <tspan font-weight="bold">Legal Admissibility:</tspan> 100% explainable score</text>
+  </g>
+
+  <!-- Card 4: Limitations -->
+  <g id="Footer-Limitations">
+    <rect x="961" y="700" width="298" height="240" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#cardShadow)"/>
+    <rect x="961" y="700" width="298" height="6" rx="3" fill="#f59e0b"/>
+    <circle cx="986" cy="732" r="13" fill="#fef3c7"/>
+    <text x="986" y="737" fill="#d97706" font-size="13" text-anchor="middle">⚠️</text>
+    <text x="1008" y="736" fill="#0f172a" font-size="14.5" font-weight="800">Operational Limitations</text>
+    
+    <text x="976" y="767" fill="#334155" font-size="11">• <tspan font-weight="bold">Wind Speed Window:</tspan> 2.0 to 12.0 m/s optimal</text>
+    <text x="976" y="789" fill="#334155" font-size="11">• Low wind (&lt; 2 m/s): Natural sea surface mirror</text>
+    <text x="976" y="811" fill="#334155" font-size="11">• High wind (&gt; 14 m/s): Wave mixing emulsifies oil</text>
+    <text x="976" y="833" fill="#334155" font-size="11">• <tspan font-weight="bold">Thickness Ambiguity:</tspan> SAR detects surface damp</text>
+    <text x="976" y="855" fill="#334155" font-size="11">• Requires optical S2 to distinguish thick vs sheen</text>
+    <text x="976" y="877" fill="#334155" font-size="11">• <tspan font-weight="bold">Dark Ships:</tspan> Dead-reckoning extrapolates paths</text>
+    <text x="976" y="899" fill="#334155" font-size="11">• Unverified transponder gaps incur DR penalty</text>
+    <text x="976" y="921" fill="#334155" font-size="11">• <tspan font-weight="bold">Attribution:</tspan> High-probability ranking, not trial</text>
+  </g>
+
+  <!-- Card 5: Next Steps -->
+  <g id="Footer-NextSteps">
+    <rect x="1273" y="700" width="302" height="240" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#cardShadow)"/>
+    <rect x="1273" y="700" width="302" height="6" rx="3" fill="#0ea5e9"/>
+    <circle cx="1298" cy="732" r="13" fill="#e0f2fe"/>
+    <text x="1298" y="737" fill="#0284c7" font-size="13" text-anchor="middle">🎯</text>
+    <text x="1320" y="736" fill="#0f172a" font-size="14.5" font-weight="800">Next Steps &amp; Roadmap</text>
+    
+    <text x="1288" y="767" fill="#334155" font-size="11">• <tspan font-weight="bold">Multi-Satellite Constellation:</tspan> NISAR L-band</text>
+    <text x="1288" y="789" fill="#334155" font-size="11">• Sentinel-1C/D ingestion integration</text>
+    <text x="1288" y="811" fill="#334155" font-size="11">• <tspan font-weight="bold">Automated Satellite Tasking:</tspan> Trigger SAR on</text>
+    <text x="1288" y="833" fill="#334155" font-size="11">• coastal AIS route anomalies or transponder drops</text>
+    <text x="1288" y="855" fill="#334155" font-size="11">• <tspan font-weight="bold">Chemical Weathering (ADIOS):</tspan> Oil evaporation</text>
+    <text x="1288" y="877" fill="#334155" font-size="11">• Viscosity &amp; emulsification decay rates</text>
+    <text x="1288" y="899" fill="#334155" font-size="11">• <tspan font-weight="bold">Edge Deployment:</tspan> Porting to NVIDIA Jetson</text>
+    <text x="1288" y="921" fill="#334155" font-size="11">• On-board maritime patrol aircraft &amp; drones</text>
+  </g>
+
+</svg>

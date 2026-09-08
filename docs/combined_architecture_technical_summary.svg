@@ -1,0 +1,272 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 920" width="100%" height="100%" style="background-color: #07030d; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="canvasGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e051a"/>
+      <stop offset="50%" stop-color="#07030d"/>
+      <stop offset="100%" stop-color="#040208"/>
+    </linearGradient>
+    <linearGradient id="cardGradPurple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e0b33"/>
+      <stop offset="100%" stop-color="#11051f"/>
+    </linearGradient>
+    <linearGradient id="cardGradCyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#082535"/>
+      <stop offset="100%" stop-color="#05151f"/>
+    </linearGradient>
+    <linearGradient id="cardGradEmerald" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#092e22"/>
+      <stop offset="100%" stop-color="#041a13"/>
+    </linearGradient>
+    <linearGradient id="cardGradAmber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#381e05"/>
+      <stop offset="100%" stop-color="#1f1002"/>
+    </linearGradient>
+
+    <!-- Glowing Filters -->
+    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glowMint" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowMint" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1280" height="920" fill="url(#canvasGrad)" />
+
+  <!-- Subtle Tactical Grid Overlay -->
+  <g stroke="#231038" stroke-width="0.6" opacity="0.35">
+    <line x1="0" y1="85" x2="1280" y2="85" />
+    <line x1="0" y1="365" x2="1280" y2="365" />
+    <line x1="0" y1="645" x2="1280" y2="645" />
+    <line x1="320" y1="0" x2="320" y2="920" stroke-dasharray="4,4"/>
+    <line x1="640" y1="0" x2="640" y2="920" stroke-dasharray="4,4"/>
+    <line x1="960" y1="0" x2="960" y2="920" stroke-dasharray="4,4"/>
+  </g>
+
+  <!-- ========================================================================
+       TOP HEADER (BRANDING & SCOPE)
+       ======================================================================== -->
+  <g id="Header">
+    <rect x="30" y="18" width="1220" height="54" rx="8" fill="#150724" stroke="#4c1d7a" stroke-width="1.2"/>
+    <circle cx="58" cy="45" r="9" fill="#38bdf8" filter="url(#glowCyan)"/>
+    <circle cx="58" cy="45" r="4" fill="#04151f"/>
+    <text x="80" y="51" fill="#38bdf8" font-size="18" font-weight="900" letter-spacing="1.5">SEASENTINEL</text>
+    <text x="220" y="50" fill="#94a3b8" font-size="13" font-weight="600">SYSTEM ARCHITECTURE · TECHNICAL SPECIFICATIONS · METHODOLOGY</text>
+    <rect x="1060" y="30" width="175" height="30" rx="15" fill="#240c3d" stroke="#38bdf8" stroke-width="1"/>
+    <text x="1147" y="50" fill="#38bdf8" font-size="11.5" font-weight="800" text-anchor="middle">SIH26143 · NTRO</text>
+  </g>
+
+  <!-- ========================================================================
+       SECTION 1: SYSTEM ARCHITECTURE (THE 4-STAGE PIPELINE)
+       ======================================================================== -->
+  <g id="Section1">
+    <!-- Header Pill -->
+    <rect x="30" y="86" width="280" height="24" rx="4" fill="#4c1d7a"/>
+    <text x="40" y="102" fill="#fff" font-size="11" font-weight="800" letter-spacing="0.5">1. END-TO-END PIPELINE ARCHITECTURE</text>
+
+    <!-- Block 1: Multi-Source Inputs -->
+    <rect x="30" y="120" width="280" height="225" rx="8" fill="url(#cardGradPurple)" stroke="#581c87" stroke-width="1.2"/>
+    <text x="45" y="145" fill="#c084fc" font-size="13.5" font-weight="800">STAGE 1: MULTI-MODAL DATA</text>
+    <text x="45" y="162" fill="#94a3b8" font-size="10">Synchronous Staging &amp; Air-Gapped Cache</text>
+    <line x1="45" y1="170" x2="295" y2="170" stroke="#3b0764" stroke-width="1"/>
+    
+    <text x="45" y="190" fill="#e2e8f0" font-size="11">• <tspan fill="#38bdf8" font-weight="bold">Sentinel-1 C-SAR</tspan> (10m RTC, VV/VH)</text>
+    <text x="57" y="206" fill="#94a3b8" font-size="9.5">Calibrated γ⁰ dB backscatter</text>
+
+    <text x="45" y="228" fill="#e2e8f0" font-size="11">• <tspan fill="#34d399" font-weight="bold">Sentinel-2 MSI</tspan> (10m/20m Optical)</text>
+    <text x="57" y="244" fill="#94a3b8" font-size="9.5">RGB &amp; NIR false-alarm filter</text>
+
+    <text x="45" y="266" fill="#e2e8f0" font-size="11">• <tspan fill="#38bdf8" font-weight="bold">ERA5 + CMEMS</tspan> (Metocean)</text>
+    <text x="57" y="282" fill="#94a3b8" font-size="9.5">Hourly 10m wind + surface currents</text>
+
+    <text x="45" y="304" fill="#e2e8f0" font-size="11">• <tspan fill="#fbbf24" font-weight="bold">MarineCadastre AIS</tspan> (SQLite)</text>
+    <text x="57" y="320" fill="#94a3b8" font-size="9.5">B-Tree indexed positional history</text>
+
+    <!-- Arrow 1 -> 2 -->
+    <path d="M 310 232 L 345 232" fill="none" stroke="#38bdf8" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- Block 2: AI & Morphometry -->
+    <rect x="345" y="120" width="280" height="225" rx="8" fill="url(#cardGradCyan)" stroke="#0369a1" stroke-width="1.2"/>
+    <text x="360" y="145" fill="#38bdf8" font-size="13.5" font-weight="800">STAGE 2: AI DETECTION</text>
+    <text x="360" y="162" fill="#94a3b8" font-size="10">Computer Vision &amp; Geodesy</text>
+    <line x1="360" y1="170" x2="610" y2="170" stroke="#0c4a6e" stroke-width="1"/>
+
+    <text x="360" y="190" fill="#e2e8f0" font-size="11">• <tspan fill="#38bdf8" font-weight="bold">PyTorch U-Net</tspan> Segmentation</text>
+    <text x="372" y="206" fill="#94a3b8" font-size="9.5">512px sliding tiles with cosine taper</text>
+
+    <text x="360" y="228" fill="#e2e8f0" font-size="11">• <tspan fill="#38bdf8" font-weight="bold">Look-Alike Rejection</tspan></text>
+    <text x="372" y="244" fill="#94a3b8" font-size="9.5">Dual-pol ratio (VV/VH) &amp; noise floor</text>
+
+    <text x="360" y="266" fill="#e2e8f0" font-size="11">• <tspan fill="#38bdf8" font-weight="bold">LocalAEQD Projection</tspan></text>
+    <text x="372" y="282" fill="#94a3b8" font-size="9.5">EPSG:9832 tangent distortion-free plane</text>
+
+    <text x="360" y="304" fill="#e2e8f0" font-size="11">• <tspan fill="#38bdf8" font-weight="bold">PCA Morphometrics</tspan></text>
+    <text x="372" y="320" fill="#94a3b8" font-size="9.5">Area, Length, Width, Orientation, C</text>
+
+    <!-- Arrow 2 -> 3 -->
+    <path d="M 625 232 L 660 232" fill="none" stroke="#38bdf8" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- Block 3: Lagrangian Drift -->
+    <rect x="660" y="120" width="280" height="225" rx="8" fill="url(#cardGradAmber)" stroke="#b45309" stroke-width="1.2"/>
+    <text x="675" y="145" fill="#fbbf24" font-size="13.5" font-weight="800">STAGE 3: DRIFT ENGINE</text>
+    <text x="675" y="162" fill="#94a3b8" font-size="10">Runge-Kutta 2nd-Order Dynamics</text>
+    <line x1="675" y1="170" x2="925" y2="170" stroke="#78350f" stroke-width="1"/>
+
+    <text x="675" y="190" fill="#e2e8f0" font-size="11">• <tspan fill="#fbbf24" font-weight="bold">Surface Vector Superposition</tspan></text>
+    <text x="687" y="206" fill="#94a3b8" font-size="9.5">V = U_curr + α·R(θ)·U_wind10</text>
+
+    <text x="675" y="228" fill="#e2e8f0" font-size="11">• <tspan fill="#fbbf24" font-weight="bold">Lagrangian Hindcast</tspan> (Δt &lt; 0)</text>
+    <text x="687" y="244" fill="#94a3b8" font-size="9.5">50-particle rewind to Spill Origin Zone</text>
+
+    <text x="675" y="266" fill="#e2e8f0" font-size="11">• <tspan fill="#fbbf24" font-weight="bold">Lagrangian Forecast</tspan> (Δt &gt; 0)</text>
+    <text x="687" y="282" fill="#94a3b8" font-size="9.5">90th percentile 24h dispersion cone</text>
+
+    <text x="675" y="304" fill="#e2e8f0" font-size="11">• <tspan fill="#fbbf24" font-weight="bold">Coastal Landfall Alert</tspan></text>
+    <text x="687" y="320" fill="#94a3b8" font-size="9.5">Natural Earth 1:10m polygon collision</text>
+
+    <!-- Arrow 3 -> 4 -->
+    <path d="M 940 232 L 975 232" fill="none" stroke="#34d399" stroke-width="1.8" marker-end="url(#arrowMint)"/>
+
+    <!-- Block 4: AIS Attribution -->
+    <rect x="975" y="120" width="275" height="225" rx="8" fill="url(#cardGradEmerald)" stroke="#059669" stroke-width="1.2"/>
+    <text x="990" y="145" fill="#34d399" font-size="13.5" font-weight="800">STAGE 4: ATTRIBUTION</text>
+    <text x="990" y="162" fill="#94a3b8" font-size="10">Explainable Multi-Criteria Fusion</text>
+    <line x1="990" y1="170" x2="1235" y2="170" stroke="#064e3b" stroke-width="1"/>
+
+    <text x="990" y="190" fill="#e2e8f0" font-size="11">• <tspan fill="#34d399" font-weight="bold">Spatiotemporal Funnel</tspan></text>
+    <text x="1002" y="206" fill="#94a3b8" font-size="9.5">BBox ±1.5° &amp; Time Window ±3.0h</text>
+
+    <text x="990" y="228" fill="#e2e8f0" font-size="11">• <tspan fill="#34d399" font-weight="bold">1-Min Kinematic Spline</tspan></text>
+    <text x="1002" y="244" fill="#94a3b8" font-size="9.5">LocalAEQD velocity-constrained DR</text>
+
+    <text x="990" y="266" fill="#e2e8f0" font-size="11">• <tspan fill="#34d399" font-weight="bold">Bayesian 5-Factor Scoring</tspan></text>
+    <text x="1002" y="282" fill="#94a3b8" font-size="9.5">Proximity, Time, Course, Prior, Anomaly</text>
+
+    <text x="990" y="304" fill="#e2e8f0" font-size="11">• <tspan fill="#34d399" font-weight="bold">Forensic Evidence Dossier</tspan></text>
+    <text x="1002" y="320" fill="#94a3b8" font-size="9.5">Court-defensible PDF/HTML &amp; GeoJSON</text>
+  </g>
+
+  <!-- ========================================================================
+       SECTION 2: METHODOLOGY (3 CORE OPERATIONAL PHASES)
+       ======================================================================== -->
+  <g id="Section2">
+    <!-- Header Pill -->
+    <rect x="30" y="365" width="220" height="24" rx="4" fill="#0369a1"/>
+    <text x="40" y="381" fill="#fff" font-size="11" font-weight="800" letter-spacing="0.5">2. CORE METHODOLOGY (3 PHASES)</text>
+
+    <!-- Phase A Card -->
+    <rect x="30" y="400" width="395" height="220" rx="8" fill="url(#cardGradPurple)" stroke="#581c87" stroke-width="1.2"/>
+    <rect x="42" y="412" width="28" height="28" rx="4" fill="#4c1d7a"/>
+    <text x="56" y="431" fill="#c084fc" font-size="13" font-weight="900" text-anchor="middle">A</text>
+    <text x="80" y="426" fill="#c084fc" font-size="13" font-weight="800">PHASE A: DETECTION &amp; CHARACTERISATION</text>
+    <text x="80" y="440" fill="#94a3b8" font-size="10.5">Automated SAR Segmentation &amp; False-Alarm Suppression</text>
+    <line x1="42" y1="450" x2="413" y2="450" stroke="#3b0764" stroke-width="1"/>
+    <text x="42" y="470" fill="#e2e8f0" font-size="10.5"><tspan fill="#38bdf8" font-weight="bold">1. Radiometric Terrain Correction (RTC):</tspan> Calibrate DN² to γ⁰ dB.</text>
+    <text x="42" y="492" fill="#e2e8f0" font-size="10.5"><tspan fill="#38bdf8" font-weight="bold">2. Deep Learning Segmentation:</tspan> PyTorch U-Net inference across tiles.</text>
+    <text x="42" y="514" fill="#e2e8f0" font-size="10.5"><tspan fill="#38bdf8" font-weight="bold">3. Dual-Polarization Ratio Filter:</tspan> VV/VH ratio rejects look-alikes.</text>
+    <text x="42" y="536" fill="#e2e8f0" font-size="10.5"><tspan fill="#38bdf8" font-weight="bold">4. Radiometric Floor Gate:</tspan> Δσ⁰ &lt; 2.5 dB confirms clean calm water.</text>
+    <text x="42" y="558" fill="#e2e8f0" font-size="10.5"><tspan fill="#38bdf8" font-weight="bold">5. Morphometry (PCA):</tspan> Length, width, area, centroid in LocalAEQD.</text>
+    <text x="42" y="580" fill="#e2e8f0" font-size="10.5"><tspan fill="#38bdf8" font-weight="bold">6. Kinematic Age Proxy:</tspan> Advection elapsed hours (T_origin → T_sat).</text>
+    <rect x="42" y="594" width="371" height="18" rx="3" fill="#150624" stroke="#c084fc" stroke-width="0.8"/>
+    <text x="227" y="607" fill="#c084fc" font-size="9" font-weight="bold" text-anchor="middle">IoU (Oil): 0.8891 · Pixel Accuracy: 98.44% · False Positive Rate: 1.06%</text>
+
+    <!-- Phase B Card -->
+    <rect x="442" y="400" width="395" height="220" rx="8" fill="url(#cardGradAmber)" stroke="#b45309" stroke-width="1.2"/>
+    <rect x="454" y="412" width="28" height="28" rx="4" fill="#78350f"/>
+    <text x="468" y="431" fill="#fbbf24" font-size="13" font-weight="900" text-anchor="middle">B</text>
+    <text x="492" y="426" fill="#fbbf24" font-size="13" font-weight="800">PHASE B: LAGRANGIAN DRIFT MODELING</text>
+    <text x="492" y="440" fill="#94a3b8" font-size="10.5">Hindcasting Origin Release &amp; Forecasting Spread</text>
+    <line x1="454" y1="450" x2="825" y2="450" stroke="#451a03" stroke-width="1"/>
+    <text x="454" y="470" fill="#e2e8f0" font-size="10.5"><tspan fill="#fbbf24" font-weight="bold">1. Metocean Superposition:</tspan> V = U_curr + α·R(θ)·U_wind10.</text>
+    <text x="454" y="492" fill="#e2e8f0" font-size="10.5"><tspan fill="#fbbf24" font-weight="bold">2. Wind Leeway (α = 3.1%):</tspan> Coriolis deflection angle θ = ±12°.</text>
+    <text x="454" y="514" fill="#e2e8f0" font-size="10.5"><tspan fill="#fbbf24" font-weight="bold">3. Runge-Kutta 2nd Order:</tspan> Reversible midpoint integrator (Δt = 15m).</text>
+    <text x="454" y="536" fill="#e2e8f0" font-size="10.5"><tspan fill="#fbbf24" font-weight="bold">4. Monte-Carlo Ensemble:</tspan> 50 seeded particles rewound 12h backwards.</text>
+    <text x="454" y="558" fill="#e2e8f0" font-size="10.5"><tspan fill="#fbbf24" font-weight="bold">5. Spill Origin Zone:</tspan> Converged centroid + uncertainty radius R_zone.</text>
+    <text x="454" y="580" fill="#e2e8f0" font-size="10.5"><tspan fill="#fbbf24" font-weight="bold">6. Forward 24h Dispersion:</tspan> 90th percentile swept cone + landfall check.</text>
+    <rect x="454" y="594" width="371" height="18" rx="3" fill="#241002" stroke="#fbbf24" stroke-width="0.8"/>
+    <text x="639" y="607" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle">Numerical Reversibility Error: &lt; 1 mm · Ensemble Size: 50 Particles</text>
+
+    <!-- Phase C Card -->
+    <rect x="855" y="400" width="395" height="220" rx="8" fill="url(#cardGradEmerald)" stroke="#059669" stroke-width="1.2"/>
+    <rect x="867" y="412" width="28" height="28" rx="4" fill="#064e3b"/>
+    <text x="881" y="431" fill="#34d399" font-size="13" font-weight="900" text-anchor="middle">C</text>
+    <text x="905" y="426" fill="#34d399" font-size="13" font-weight="800">PHASE C: AIS TRAFFIC ATTRIBUTION</text>
+    <text x="905" y="440" fill="#94a3b8" font-size="10.5">Spatiotemporal Pruning &amp; Multi-Criteria Scoring</text>
+    <line x1="867" y1="450" x2="1238" y2="450" stroke="#022c22" stroke-width="1"/>
+    <text x="867" y="470" fill="#e2e8f0" font-size="10.5"><tspan fill="#34d399" font-weight="bold">1. Spatiotemporal Funnel:</tspan> Query indexed BBox (±1.5°) &amp; Window (±3h).</text>
+    <text x="867" y="492" fill="#e2e8f0" font-size="10.5"><tspan fill="#34d399" font-weight="bold">2. 1-Minute Resampling:</tspan> Hermite cubic velocity-constrained spline.</text>
+    <text x="867" y="514" fill="#e2e8f0" font-size="10.5"><tspan fill="#34d399" font-weight="bold">3. Dead-Reckoning (DR):</tspan> Interpolate across transponder gaps (Δt &gt; 15m).</text>
+    <text x="867" y="536" fill="#e2e8f0" font-size="10.5"><tspan fill="#34d399" font-weight="bold">4. 5-Pillar Score:</tspan> Proximity, Time, Course Alignment, Prior, Behavior.</text>
+    <text x="867" y="558" fill="#e2e8f0" font-size="10.5"><tspan fill="#34d399" font-weight="bold">5. DR Confidence Multiplier:</tspan> C_track = 1.0 - 0.65 × Fraction_DR.</text>
+    <text x="867" y="580" fill="#e2e8f0" font-size="10.5"><tspan fill="#34d399" font-weight="bold">6. Ranked Output:</tspan> Solid-to-hairline evidence bar &amp; legal dossier.</text>
+    <rect x="867" y="594" width="371" height="18" rx="3" fill="#032117" stroke="#34d399" stroke-width="0.8"/>
+    <text x="1052" y="607" fill="#34d399" font-size="9" font-weight="bold" text-anchor="middle">Attribution Latency: &lt; 35 ms · Scheme: ITU-R M.1371 / MARPOL Annex I</text>
+  </g>
+
+  <!-- ========================================================================
+       SECTION 3: TECHNICAL SPECIFICATIONS & MATHEMATICAL FORMULATIONS
+       ======================================================================== -->
+  <g id="Section3">
+    <!-- Header Pill -->
+    <rect x="30" y="645" width="280" height="24" rx="4" fill="#059669"/>
+    <text x="40" y="661" fill="#fff" font-size="11" font-weight="800" letter-spacing="0.5">3. TECHNICAL SPECS &amp; EXACT FORMULAS</text>
+
+    <!-- Formula Box 1: Surface Advection -->
+    <rect x="30" y="680" width="395" height="215" rx="8" fill="url(#cardGradAmber)" stroke="#b45309" stroke-width="1.2"/>
+    <text x="45" y="705" fill="#fbbf24" font-size="13" font-weight="800">HYDRODYNAMIC ADVECTION FORMULATION</text>
+    <line x1="45" y1="715" x2="410" y2="715" stroke="#451a03" stroke-width="1"/>
+    <rect x="45" y="725" width="365" height="32" rx="4" fill="#241002" stroke="#fbbf24" stroke-width="0.8"/>
+    <text x="227" y="746" fill="#fbbf24" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">V = U_curr + α · R(θ) · U_wind10</text>
+    <text x="45" y="776" fill="#D8D3CE" font-size="10">• <tspan fill="#fbbf24" font-weight="bold">U_curr:</tspan> CMEMS surface velocity grid (hourly, bicubic)</text>
+    <text x="45" y="794" fill="#D8D3CE" font-size="10">• <tspan fill="#fbbf24" font-weight="bold">U_wind10:</tspan> ERA5 10m atmospheric wind vector field</text>
+    <text x="45" y="812" fill="#D8D3CE" font-size="10">• <tspan fill="#fbbf24" font-weight="bold">α = 0.031:</tspan> Empirical 3.1% wind leeway transfer factor</text>
+    <text x="45" y="830" fill="#D8D3CE" font-size="10">• <tspan fill="#fbbf24" font-weight="bold">R(θ):</tspan> Coriolis leeway rotation matrix (θ = +12° N / -12° S)</text>
+    <text x="45" y="848" fill="#D8D3CE" font-size="10">• <tspan fill="#fbbf24" font-weight="bold">RK2 Midpoint:</tspan> X_n+1 = X_n + Δt · V(X_n + Δt/2 · k1, tn + Δt/2)</text>
+    <text x="45" y="866" fill="#D8D3CE" font-size="10">• <tspan fill="#fbbf24" font-weight="bold">R_zone:</tspan> max(2.5 km, 2.0·σ_ensemble + √(2·Kh·Δt))</text>
+
+    <!-- Formula Box 2: Attribution Scoring -->
+    <rect x="442" y="680" width="495" height="215" rx="8" fill="url(#cardGradEmerald)" stroke="#059669" stroke-width="1.2"/>
+    <text x="457" y="705" fill="#34d399" font-size="13" font-weight="800">EXPLAINABLE ATTRIBUTION &amp; CONFIDENCE SCORING</text>
+    <line x1="457" y1="715" x2="922" y2="715" stroke="#022c22" stroke-width="1"/>
+    <rect x="457" y="725" width="465" height="32" rx="4" fill="#032117" stroke="#34d399" stroke-width="0.8"/>
+    <text x="689" y="746" fill="#34d399" font-size="12" font-weight="bold" font-family="monospace" text-anchor="middle">Score = 100 × [ ( Σ w_i · S_i ) / Σ w_i ] × C_track</text>
+    
+    <g font-size="10" fill="#D8D3CE">
+      <text x="457" y="776">• <tspan fill="#34d399" font-weight="bold">S_prox (30%):</tspan> exp(-d_min / R_zone) — Closest approach to origin</text>
+      <text x="457" y="794">• <tspan fill="#34d399" font-weight="bold">S_time (20%):</tspan> exp(-|Δt| / 1.5h) — Temporal coincidence decay</text>
+      <text x="457" y="812">• <tspan fill="#34d399" font-weight="bold">S_traj (10%):</tspan> max(0, cos(COG - θ_advection)) — Course match</text>
+      <text x="457" y="830">• <tspan fill="#34d399" font-weight="bold">S_type (15%):</tspan> Tanker: 0.96 | Chem: 0.88 | Cargo: 0.55 | Fishing: 0.20</text>
+      <text x="457" y="848">• <tspan fill="#34d399" font-weight="bold">S_beh  (25%):</tspan> 0.40·Speed (6-14kn) + 0.30·Turn + 0.30·AIS Gap</text>
+      <text x="457" y="866">• <tspan fill="#38bdf8" font-weight="bold">C_track:</tspan> 1.0 - 0.65 × Fraction_DR (Penalizes unverified tracks)</text>
+    </g>
+
+    <!-- Formula Box 3: Benchmark & Latency -->
+    <rect x="955" y="680" width="295" height="215" rx="8" fill="url(#cardGradCyan)" stroke="#0369a1" stroke-width="1.2"/>
+    <text x="970" y="705" fill="#38bdf8" font-size="13" font-weight="800">SYSTEM BENCHMARKS</text>
+    <line x1="970" y1="715" x2="1235" y2="715" stroke="#0c4a6e" stroke-width="1"/>
+    
+    <g font-size="10.5" fill="#D8D3CE">
+      <text x="970" y="736"><tspan fill="#38bdf8" font-weight="bold">End-to-End Latency:</tspan> 138 ms</text>
+      <text x="970" y="756"><tspan fill="#38bdf8" font-weight="bold">SAR Tile Inference:</tspan> 45 ms</text>
+      <text x="970" y="776"><tspan fill="#38bdf8" font-weight="bold">RK2 Hindcast/Forecast:</tspan> 28 ms</text>
+      <text x="970" y="796"><tspan fill="#38bdf8" font-weight="bold">AIS SQLite Funnel:</tspan> 35 ms</text>
+      <text x="970" y="816"><tspan fill="#38bdf8" font-weight="bold">RAM Footprint:</tspan> &lt; 350 MB</text>
+      <text x="970" y="836"><tspan fill="#38bdf8" font-weight="bold">Air-Gap Ready:</tspan> 100% Offline</text>
+      <text x="970" y="856"><tspan fill="#38bdf8" font-weight="bold">Test Suite:</tspan> 9/9 Unit Tests Passing</text>
+    </g>
+    <rect x="970" y="868" width="265" height="18" rx="3" fill="#041824" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="1102" y="881" fill="#38bdf8" font-size="9" font-weight="bold" text-anchor="middle">FastAPI + PyTorch + Leaflet 1.9</text>
+  </g>
+</svg>
